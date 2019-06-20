@@ -1,7 +1,7 @@
 --
 --  File Name:         UartContext.vhd
 --  Design Unit Name:  UartContext
---  Revision:          STANDARD VERSION
+--  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
 --
