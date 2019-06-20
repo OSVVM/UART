@@ -1,7 +1,7 @@
 --
 --  File Name:         UartTx.vhd
 --  Design Unit Name:  UartTx
---  Revision:          OSVVM MODELS STANDARD VERSION
+--  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
 --  Contributor(s):
@@ -20,7 +20,6 @@
 --  Revision History:
 --    Date       Version    Description
 --    1999       1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
---    2015       2019.05    Removed generics for DEFAULT_ID, DEFAULT_DEST, DEFAULT_USER
 --    2019.05    2019.05    Updated for OSVVM public release
 --
 --      Copyright (c) 1999 - 2019 by SynthWorks Design Inc.  All rights reserved.
@@ -53,10 +52,10 @@ library osvvm_vip ;
 
 entity UartTx is 
   generic (
-    DEFAULT_PARITY_MODE     : integer := UARTTB_PARITY_EVEN ; 
-    DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1 ; 
+    DEFAULT_BAUD            : time    := UART_BAUD_PERIOD_125K ;
     DEFAULT_NUM_DATA_BITS   : integer := UARTTB_DATA_BITS_8 ; 
-    DEFAULT_BAUD            : time    := UART_BAUD_PERIOD_115200  
+    DEFAULT_PARITY_MODE     : integer := UARTTB_PARITY_EVEN ; 
+    DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1  
   ) ;
   port (
     TransactionRec      : InOut UartRecType ;
@@ -78,7 +77,7 @@ architecture model of UartTx is
   signal ParityMode  : integer ;
   signal NumStopBits : integer ;
   signal NumDataBits : integer ;
-  signal Baud        : time    := UART_BAUD_PERIOD_115200 ; -- init for clock start
+  signal Baud        : time    := UART_BAUD_PERIOD_125K ; -- init for clock start
 
 begin
 

@@ -54,10 +54,10 @@ library osvvm_vip ;
 
 entity UartRx is
   generic (
-    DEFAULT_PARITY_MODE     : integer := UARTTB_PARITY_EVEN ; 
-    DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1 ; 
+    DEFAULT_BAUD            : time    := UART_BAUD_PERIOD_125K ;
     DEFAULT_NUM_DATA_BITS   : integer := UARTTB_DATA_BITS_8 ; 
-    DEFAULT_BAUD            : time    := UART_BAUD_PERIOD_115200  
+    DEFAULT_PARITY_MODE     : integer := UARTTB_PARITY_EVEN ; 
+    DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1  
   ) ;
   port (
     TransactionRec         : InOut UartRecType ;
