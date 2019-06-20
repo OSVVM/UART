@@ -1,7 +1,7 @@
 --
 --  File Name:         UartRx.vhd
 --  Design Unit Name:  UartRx
---  Revision:          OSVVM MODELS STANDARD VERSION
+--  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
 --  Contributor(s):
@@ -20,7 +20,6 @@
 --  Revision History:
 --    Date       Version    Description
 --    1999       1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
---    2015       2019.05    Removed generics for DEFAULT_ID, DEFAULT_DEST, DEFAULT_USER
 --    2019.05    2019.05    Updated for OSVVM public release
 --
 --      Copyright (c) 1999 - 2019 by SynthWorks Design Inc.  All rights reserved.
@@ -95,7 +94,7 @@ architecture model of UartRx is
   signal ParityMode  : integer ;
   signal NumStopBits : integer ;
   signal NumDataBits : integer ;
-  signal Baud        : time    := UART_BAUD_PERIOD_115200 ; -- init for clock start
+  signal Baud        : time    := UART_BAUD_PERIOD_125K ; -- init for clock start
 
 begin
 
@@ -107,7 +106,6 @@ begin
   begin
     ID := GetAlertLogID(MODEL_INSTANCE_NAME, ALERTLOG_BASE_ID) ;
     ModelID                   <= ID ; 
---    TransactionRec.AlertLogID <= GetAlertLogID(MODEL_INSTANCE_NAME & ": Transaction", ID ) ;
     ReceiveFifo.SetAlertLogID(MODEL_INSTANCE_NAME & ": Receive FIFO", ID) ;
     wait ;
   end process InitializeAlerts ;
@@ -329,16 +327,21 @@ begin
         
         -- Log at interface at DEBUG level
         Log(ModelID, 
-          "Received: " & 
-          to_string( UartStimType'(RxData, UartTb_ErrorModeType(ErrorMode)) ) & 
-          "  Operation # " & to_string(ReceiveCount),
+          "Received:" & 
+          " Data = " & to_hstring(RxData) & 
+          ", Parity = " & to_string(RxParity) & 
+          ", Stop = " & to_string(iSerialDataIn) & 
+          ", Parity Error = " & to_string(ErrorMode(UARTTB_PARITY_INDEX)) & 
+          ", Stop Error = " & to_string(ErrorMode(UARTTB_STOP_INDEX)) & 
+          ", Break Error = " & to_string(ErrorMode(UARTTB_BREAK_INDEX)) & 
+          ",  Operation # " & to_string(ReceiveCount),
           DEBUG
         ) ;
         
       when others =>
         DataBitCount <= 0 ;
         RxData       := (others => '0') ;   -- %% Tb2 Lab 10.1.5
-        RxParity := '0'  ; -- No Parity
+        RxParity := '-'  ; -- No Parity
         ErrorMode := (others => '0') ;
 
     end case ;
