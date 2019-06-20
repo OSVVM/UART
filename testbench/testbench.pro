@@ -1,6 +1,20 @@
 library osvvm_TbUart
-analyze TestCtrl_e.vhd
-analyze TbUart.vhd
-analyze TbUart_BasicSendGet.vhd
+analyze  TestCtrl_e.vhd
+analyze  TbUart.vhd
+analyze  TbUart_SendGet1.vhd
+analyze  TbUart_SendGet2.vhd
+analyze  TbUart_Options1.vhd
+analyze  TbUart_Options2.vhd
+analyze  TbUart_Checkers1.vhd
+analyze  TbUart_Checkers2.vhd
+analyze  TbUart_Scoreboard1.vhd
+analyze  TbUart_Overload1.vhd
 
-simulate TbUart_BasicSendGet
+simulate TbUart_SendGet1
+simulate TbUart_SendGet2
+simulate TbUart_Options1
+simulate TbUart_Options2
+simulate TbUart_Checkers1
+simulate TbUart_Checkers2
+simulate TbUart_Scoreboard1
+simulate TbUart_Overload1

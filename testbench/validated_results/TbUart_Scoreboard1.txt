@@ -1,0 +1,285 @@
+%% Log   INFO    in TB UartTxProc, Sequence 1 -- Basic Transfer with Passing data and status at 20000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 08, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 1 at 20000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 08, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 1 at 103750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 09, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 2 at 108000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 09, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 2 at 191750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0A, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 3 at 196000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 0A, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 3 at 279750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0B, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 4 at 292000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 0B, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 4 at 375750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0C, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 5 at 388000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 5 at 471750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0D, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 6 at 492000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 6 at 575750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0E, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 7 at 604000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 7 at 687750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0F, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 8 at 724000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 8 at 807750 ns
+%% Log   PASSED  in Default, Alert Count Received : 0 at 852000 ns
+
+
+%% Log   INFO    in TB UartTxProc, Sequence 2 -- All Status Values, 64 - 20 mismatches at 852000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 00, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 9 at 852000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 9 at 935750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 01, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 10 at 940000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 01, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 01, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 10 at 1023750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 02, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 11 at 1028000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 02, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 02, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 11 at 1111750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 03, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 12 at 1116000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 03, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 03, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 12 at 1199750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 04, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 13 at 1204000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 04, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 04, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 13 at 1287750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 05, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 14 at 1292000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 05, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 05, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 14 at 1375750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 06, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 15 at 1380000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 06, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 06, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 15 at 1463750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 07, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 16 at 1468000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 07, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 07, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 16 at 1551750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 08, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 17 at 1556000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 08, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 08, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 17 at 1639750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 09, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 18 at 1644000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 09, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 18 at 1727750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0A, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 19 at 1732000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0A, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0A, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 19 at 1815750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0B, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 20 at 1820000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0B, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0B, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 20 at 1903750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0C, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 21 at 1908000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0C, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0C, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 21 at 1991750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0D, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 22 at 1996000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0D, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0D, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 22 at 2079750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0E, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 23 at 2084000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0E, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0E, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 23 at 2167750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0F, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 24 at 2172000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0F, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0F, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 24 at 2255750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 10, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 25 at 2260000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 10, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 10, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 25 at 2343750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 11, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 26 at 2356000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 11, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 11, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 26 at 2439750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 12, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 27 at 2452000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 12, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 27 at 2535750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 13, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 28 at 2548000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 13, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 13, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 28 at 2631750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 14, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 29 at 2644000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 14, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 14, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 29 at 2727750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 15, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 30 at 2740000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 15, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 15, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 30 at 2823750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 16, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 31 at 2836000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 16, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 16, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 31 at 2919750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 17, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 32 at 2932000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 17, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 17, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 32 at 3015750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 18, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 33 at 3028000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 18, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 18, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 33 at 3111750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 19, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 34 at 3124000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 19, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 19, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 34 at 3207750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1A, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 35 at 3220000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1A, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1A, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 35 at 3303750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1B, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 36 at 3316000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 1B, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 36 at 3399750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1C, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 37 at 3412000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1C, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1C, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 37 at 3495750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1D, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 38 at 3508000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1D, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1D, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 38 at 3591750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1E, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 39 at 3604000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1E, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1E, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 39 at 3687750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1F, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 40 at 3700000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1F, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1F, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 40 at 3783750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 20, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 41 at 3796000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 20, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 41 at 3879750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 21, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 42 at 4060000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 21, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 42 at 4143750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 22, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 43 at 4332000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 22, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 43 at 4415750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 23, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 44 at 4612000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 23, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 44 at 4695750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 24, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 45 at 4900000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 45 at 4983750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 25, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 46 at 5196000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 46 at 5279750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 26, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 47 at 5500000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 47 at 5583750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 27, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 48 at 5812000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 48 at 5895750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 28, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 49 at 6132000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 28, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 49 at 6215750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 29, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 50 at 6460000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 29, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 50 at 6543750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2A, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 51 at 6796000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 2A, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 51 at 6879750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2B, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 52 at 7140000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 2B, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 52 at 7223750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2C, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 53 at 7492000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 53 at 7575750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2D, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 54 at 7852000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 54 at 7935750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2E, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 55 at 8220000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 55 at 8303750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2F, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 56 at 8596000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 56 at 8679750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 30, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 57 at 8980000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 30, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 57 at 9063750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 31, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 58 at 9372000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 31, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 58 at 9455750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 32, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 59 at 9772000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 32, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 59 at 9855750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 33, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 60 at 10180000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 33, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 60 at 10263750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 34, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 61 at 10596000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 61 at 10679750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 35, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 62 at 11020000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 62 at 11103750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 36, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 63 at 11452000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 63 at 11535750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 37, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 64 at 11892000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 64 at 11975750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 38, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 65 at 12340000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 38, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 65 at 12423750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 39, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 66 at 12796000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 39, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 66 at 12879750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3A, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 67 at 13260000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 3A, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 67 at 13343750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3B, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 68 at 13732000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 3B, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 68 at 13815750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3C, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 69 at 14212000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 69 at 14295750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3D, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 70 at 14700000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 70 at 14783750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3E, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 71 at 15196000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 71 at 15279750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3F, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 72 at 15700000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 72 at 15783750 ns
+%% Log   PASSED  in Default, Alert Count Received : 44 at 16212000 ns
+
+
+%% Log   INFO    in TB UartTxProc, Sequence 3 -- Data mismatch with All Status Values, 64 - 16 mismatches at 16212000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 00, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 73 at 16212000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 01, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 73 at 16295750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 01, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 74 at 16300000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 01, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 02, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 74 at 16383750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 02, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 75 at 16388000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 02, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 03, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 75 at 16471750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 03, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 76 at 16476000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 03, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 04, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 76 at 16559750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 04, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 77 at 16564000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 04, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 05, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 77 at 16647750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 05, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 78 at 16652000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 05, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 06, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 78 at 16735750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 06, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 79 at 16740000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 06, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 07, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 79 at 16823750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 07, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 80 at 16828000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 07, Parity Error: 0, Stop Error: 0, Break Error: 0   Expected: Data = 08, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 80 at 16911750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 08, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 81 at 16916000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 08, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 09, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 81 at 16999750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 09, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 82 at 17004000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 09, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0A, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 82 at 17087750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0A, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 83 at 17092000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0A, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0B, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 83 at 17175750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0B, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 84 at 17180000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0B, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0C, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 84 at 17263750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0C, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 85 at 17268000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0C, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0D, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 85 at 17351750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0D, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 86 at 17356000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0D, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0E, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 86 at 17439750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0E, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 87 at 17444000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0E, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 0F, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 87 at 17527750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 0F, Parity Error: 1, Stop Error: 0, Break Error: 0  Operation # 88 at 17532000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 0F, Parity Error: 1, Stop Error: 0, Break Error: 0   Expected: Data = 10, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 88 at 17615750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 10, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 89 at 17620000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 10, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 11, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 89 at 17703750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 11, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 90 at 17716000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 11, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 12, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 90 at 17799750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 12, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 91 at 17812000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 12, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 13, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 91 at 17895750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 13, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 92 at 17908000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 13, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 14, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 92 at 17991750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 14, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 93 at 18004000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 14, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 15, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 93 at 18087750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 15, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 94 at 18100000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 15, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 16, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 94 at 18183750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 16, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 95 at 18196000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 16, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 17, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 95 at 18279750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 17, Parity Error: 0, Stop Error: 1, Break Error: 0  Operation # 96 at 18292000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 17, Parity Error: 0, Stop Error: 1, Break Error: 0   Expected: Data = 18, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 96 at 18375750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 18, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 97 at 18388000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 18, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 19, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 97 at 18471750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 19, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 98 at 18484000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 19, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1A, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 98 at 18567750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1A, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 99 at 18580000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1A, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1B, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 99 at 18663750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1B, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 100 at 18676000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1B, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1C, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 100 at 18759750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1C, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 101 at 18772000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1C, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1D, Parity Error: 0, Stop Error: 0, Break Error: 1   Item Number: 101 at 18855750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1D, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 102 at 18868000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1D, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1E, Parity Error: 1, Stop Error: 0, Break Error: 1   Item Number: 102 at 18951750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1E, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 103 at 18964000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1E, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 1F, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 103 at 19047750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 1F, Parity Error: 1, Stop Error: 1, Break Error: 0  Operation # 104 at 19060000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 1F, Parity Error: 1, Stop Error: 1, Break Error: 0   Expected: Data = 20, Parity Error: 1, Stop Error: 1, Break Error: 1   Item Number: 104 at 19143750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 20, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 105 at 19156000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 21, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 105 at 19239750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 21, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 106 at 19420000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 22, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 106 at 19503750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 22, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 107 at 19692000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 23, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 107 at 19775750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 23, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 108 at 19972000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 24, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 108 at 20055750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 24, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 109 at 20260000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 109 at 20343750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 25, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 110 at 20556000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 110 at 20639750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 26, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 111 at 20860000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 111 at 20943750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 27, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 112 at 21172000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 112 at 21255750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 28, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 113 at 21492000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 29, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 113 at 21575750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 29, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 114 at 21820000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 2A, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 114 at 21903750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2A, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 115 at 22156000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 2B, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 115 at 22239750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2B, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 116 at 22500000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 2C, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 116 at 22583750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2C, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 117 at 22852000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 117 at 22935750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2D, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 118 at 23212000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 118 at 23295750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2E, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 119 at 23580000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 119 at 23663750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 2F, Parity Error: 1, Stop Error: 0, Break Error: 1  Operation # 120 at 23956000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 120 at 24039750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 30, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 121 at 24340000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 31, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 121 at 24423750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 31, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 122 at 24732000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 32, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 122 at 24815750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 32, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 123 at 25132000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 33, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 123 at 25215750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 33, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 124 at 25540000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 34, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 124 at 25623750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 34, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 125 at 25956000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 125 at 26039750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 35, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 126 at 26380000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 126 at 26463750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 36, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 127 at 26812000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 127 at 26895750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 37, Parity Error: 0, Stop Error: 1, Break Error: 1  Operation # 128 at 27252000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 128 at 27335750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 38, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 129 at 27700000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 39, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 129 at 27783750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 39, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 130 at 28156000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 3A, Parity Error: 1, Stop Error: 0, Break Error: 0   Item Number: 130 at 28239750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3A, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 131 at 28620000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 3B, Parity Error: 0, Stop Error: 1, Break Error: 0   Item Number: 131 at 28703750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3B, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 132 at 29092000 ns
+%% Alert ERROR   in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Expected: Data = 3C, Parity Error: 1, Stop Error: 1, Break Error: 0   Item Number: 132 at 29175750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3C, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 133 at 29572000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 133 at 29655750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3D, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 134 at 30060000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 134 at 30143750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3E, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 135 at 30556000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 135 at 30639750 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 3F, Parity Error: 1, Stop Error: 1, Break Error: 1  Operation # 136 at 31060000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1   Item Number: 136 at 31143750 ns
+%% Log   INFO    in TB UartTxProc, Sentinal Transfer to mark end of test at 31572000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 50, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 137 at 31572000 ns
+%% Log   PASSED  in UART_SB1,    Received: Data = 50, Parity Error: 0, Stop Error: 0, Break Error: 0   Item Number: 137 at 31655750 ns
+%% Log   PASSED  in Default, Alert Count Received : 92 at 31660000 ns

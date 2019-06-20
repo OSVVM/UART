@@ -1,27 +1,42 @@
 --
---  File Name:          TbUart.vhd
---  Block Name:         TbUart 
+--  File Name:         TbUart.vhd
+--  Design Unit Name:  TbUart
+--  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
---  Author:             Jim Lewis, 503-590-4787
+--  Maintainer:        Jim Lewis      email:  jim@synthworks.com
+--  Contributor(s):
+--     Jim Lewis      jim@synthworks.com
 --
---  Creation Date:      11/99
---  Last Updated:       05/19
 --
 --  Description:
 --    Testbench that connects UartTx and UartRx
---    
 --
---  Project:      
+--
+--  Developed by:
 --        SynthWorks Design Inc.
---        Training Courses
---        11898 SW 128th Ave.
---        Tigard, Or  97223
+--        VHDL Training Classes
 --        http://www.SynthWorks.com
---        email:  jim@SynthWorks.com
 --
---  Copyright (c) 1999 - 2019 by SynthWorks Design Inc.  All rights reserved.
+--  Revision History:
+--    Date       Version    Description
+--    1999       1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
+--    2019.05    2019.05    Updated for OSVVM public release
 --
---  
+--      Copyright (c) 1999 - 2019 by SynthWorks Design Inc.  All rights reserved.
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+--
+
 library ieee ;
   use ieee.std_logic_1164.all ;
   use ieee.numeric_std.all ;

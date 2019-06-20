@@ -1,38 +1,44 @@
 --
 --  File Name:          TestCtrl_e.vhd
---  Block Name:         TestCtrl 
 --
---  Author:             Jim Lewis, 503-590-4787
+--  File Name:         TestCtrl_e.vhd
+--  Design Unit Name:  TestCtrl
+--  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
---  Creation Date:      11/99
---  Last Updated:       11/01
+--  Maintainer:        Jim Lewis      email:  jim@synthworks.com
+--  Contributor(s):
+--     Jim Lewis      jim@synthworks.com
+--
 --
 --  Description:
---    Test Control
---    Generates stimulus values and synchronization for 
---    Bus Functional models which handle the stimulus in an
---    interface dependent manner.
+--    Entity for TestCtrl architectures
 --
---  Project:      
+--
+--  Developed by:
 --        SynthWorks Design Inc.
---        Training Courses
---        11898 SW 128th Ave.
---        Tigard, Or  97223
+--        VHDL Training Classes
 --        http://www.SynthWorks.com
---        email:  jim@SynthWorks.com
---
---  Copyright (c) 1999, 2001 by SynthWorks Design Inc.  All rights reserved.
---
---  $Id: $
---
---  $Revision: $
 --
 --  Revision History:
---    $Log: $
+--    Date       Version    Description
+--    1999       1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
+--    2019.05    2019.05    Updated for OSVVM public release
 --
---  Known Bugs:
---    None
---  
+--      Copyright (c) 1999 - 2019 by SynthWorks Design Inc.  All rights reserved.
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+--
+
 library ieee ;
   use ieee.std_logic_1164.all ;
   use ieee.numeric_std.all ;

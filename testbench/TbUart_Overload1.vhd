@@ -1,6 +1,6 @@
 --
---  File Name:         TbUart_SendGet1.vhd
---  Design Unit Name:  TbUart_SendGet1
+--  File Name:         TbUart_Overload1.vhd
+--  Design Unit Name:  TbUart_Overload1
 --  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -9,7 +9,8 @@
 --
 --
 --  Description:
---    Validate send, get, check transactions with errors in PE, SE, and BE 
+--    Validate UartSend, UartGet, UartCheck 
+--      Variant of TbUart_SendGet1.vhd
 --
 --
 --  Developed by:
@@ -37,7 +38,7 @@
 -- limitations under the License.
 --
 
-architecture SendGet1 of TestCtrl is
+architecture Overload1 of TestCtrl is
 
   signal CheckErrors : boolean ;
   signal TestActive  : boolean := TRUE ;
@@ -56,13 +57,13 @@ begin
   ControlProc : process
   begin
     -- Initialization of test
-    SetAlertLogName("TbUart_SendGet1") ;
+    SetAlertLogName("TbUart_Overload1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
     UartScoreboard.SetAlertLogID("UART_SB1") ; 
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen("./results/TbUart_SendGet1.txt") ;
+    TranscriptOpen("./results/TbUart_Overload1.txt") ;
     SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
@@ -75,7 +76,7 @@ begin
     AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
-    AlertIfDiff("./results/TbUart_SendGet1.txt", "../Uart/testbench/validated_results/TbUart_SendGet1.txt", "") ; 
+    AlertIfDiff("./results/TbUart_Overload1.txt", "../Uart/testbench/validated_results/TbUart_Overload1.txt", "") ; 
     
     print("") ;
     ReportAlerts(ExternalErrors => (FAILURE => 0, ERROR => -4, WARNING => 0)) ; 
@@ -86,7 +87,7 @@ begin
 
   ------------------------------------------------------------
   -- UartTbTxProc
-  --   Provides transactions to UartTx via Send
+  --   Provides transactions to UartTx via UartSend
   --   Used to test the UART Receiver in the UUT
   ------------------------------------------------------------
   UartTbTxProc : process
@@ -99,11 +100,11 @@ begin
     WaitForClock(UartTxRec, 2) ; 
     
     --  Sequence 1
-    Send(UartTxRec, X"50") ;
-    Send(UartTxRec, X"51", UARTTB_PARITY_ERROR) ;
-    Send(UartTxRec, X"52", UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"53", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"11", UARTTB_BREAK_ERROR) ;
+    UartSend(UartTxRec, X"50") ;
+    UartSend(UartTxRec, X"51", UARTTB_PARITY_ERROR) ;
+    UartSend(UartTxRec, X"52", UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"53", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"11", UARTTB_BREAK_ERROR) ;
     
     GetTransactionCount(UartTxRec, TransactionCount) ;
     AffirmIfEqual(UartTxID, TransactionCount, 5, "Transaction Count") ;
@@ -111,25 +112,25 @@ begin
     AffirmIfEqual(UartTxID, ErrorCount, 0, "Error Count") ;
     
     --  Sequence 2
-    Send(UartTxRec, X"60", UARTTB_NO_ERROR) ;
-    Send(UartTxRec, X"61", UARTTB_PARITY_ERROR) ;
-    Send(UartTxRec, X"62", UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"63", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"12", UARTTB_BREAK_ERROR) ;
+    UartSend(UartTxRec, X"60", UARTTB_NO_ERROR) ;
+    UartSend(UartTxRec, X"61", UARTTB_PARITY_ERROR) ;
+    UartSend(UartTxRec, X"62", UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"63", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"12", UARTTB_BREAK_ERROR) ;
     
     --  Sequence 3
-    Send(UartTxRec, X"70", UARTTB_NO_ERROR) ;
-    Send(UartTxRec, X"71", UARTTB_PARITY_ERROR) ;
-    Send(UartTxRec, X"72", UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"73", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"13", UARTTB_BREAK_ERROR) ;
+    UartSend(UartTxRec, X"70", UARTTB_NO_ERROR) ;
+    UartSend(UartTxRec, X"71", UARTTB_PARITY_ERROR) ;
+    UartSend(UartTxRec, X"72", UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"73", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"13", UARTTB_BREAK_ERROR) ;
     
     --  Sequence 4
-    Send(UartTxRec, X"80") ;
-    Send(UartTxRec, X"81", UARTTB_PARITY_ERROR) ;
-    Send(UartTxRec, X"82", UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"83", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"14", UARTTB_BREAK_ERROR) ;
+    UartSend(UartTxRec, X"80") ;
+    UartSend(UartTxRec, X"81", UARTTB_PARITY_ERROR) ;
+    UartSend(UartTxRec, X"82", UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"83", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+    UartSend(UartTxRec, X"14", UARTTB_BREAK_ERROR) ;
     WaitForClock(UartTxRec, 8) ;
     
     GetTransactionCount(UartTxRec, TransactionCount) ;
@@ -172,7 +173,7 @@ begin
         when 5 =>  ExpectStim := (X"00", UARTTB_BREAK_ERROR) ;
       end case ; 
       -- Get with one parameter
-      Get(UartRxRec, RxStim.Data) ;
+      UartGet(UartRxRec, RxStim.Data) ;
       RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
         "Received: " & to_string(RxStim), 
@@ -188,7 +189,7 @@ begin
         when 5 =>  ExpectStim := (X"64", UARTTB_BREAK_ERROR) ;
       end case ; 
       -- Get with two parameters
-      Get(UartRxRec, RxStim.Data, RxStim.Error) ;
+      UartGet(UartRxRec, RxStim.Data, RxStim.Error) ;
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
         "Received: " & to_string(RxStim), 
         ".  Expected: " & to_string(ExpectStim) ) ;
@@ -208,7 +209,7 @@ begin
         when 5 =>  ExpectStim := (X"74", UARTTB_BREAK_ERROR) ;
       end case ; 
       -- Check with one parameter
-      Check(UartRxRec, ExpectStim.Data) ;
+      UartCheck(UartRxRec, ExpectStim.Data) ;
       RxStim.Data  := std_logic_vector(UartRxRec.DataFromModel) ; 
       RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
@@ -230,7 +231,7 @@ begin
         when 5 =>  ExpectStim := (X"00", UARTTB_BREAK_ERROR) ;
       end case ; 
       -- Check with two parameters
-      Check(UartRxRec, ExpectStim.Data, ExpectStim.Error) ;
+      UartCheck(UartRxRec, ExpectStim.Data, ExpectStim.Error) ;
     end loop ;
 
     --
@@ -241,11 +242,11 @@ begin
     wait ;
   end process UartTbRxProc ;
 
-end SendGet1 ;
-Configuration TbUart_SendGet1 of TbUart is
+end Overload1 ;
+Configuration TbUart_Overload1 of TbUart is
   for TestHarness
     for TestCtrl_1 : TestCtrl
-      use entity work.TestCtrl(SendGet1) ; 
+      use entity work.TestCtrl(Overload1) ; 
     end for ; 
   end for ; 
-end TbUart_SendGet1 ; 
+end TbUart_Overload1 ; 

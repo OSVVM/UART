@@ -1,0 +1,58 @@
+%% Alert ERROR   in uartrx_1, Unsupported baud = 0 ps. Using UART_BAUD_PERIOD_125K at 16250 ns
+%% Alert ERROR   in uartrx_1, Unsupported NumDataBits = 4. Using UARTTB_DATA_BITS_8 at 16250 ns
+%% Alert ERROR   in uartrx_1, Unsupported ParityMode = 2. Using EVEN PARITY at 16250 ns
+%% Alert ERROR   in uartrx_1, Unsupported NumStopBits = 0. Using UARTTB_STOP_BITS_1 at 16250 ns
+%% Alert ERROR   in uarttx_1, Unsupported baud = 0 ps. Using UART_BAUD_PERIOD_125K at 20000 ns
+%% Alert ERROR   in uarttx_1, Unsupported NumDataBits = 4. Using UARTTB_DATA_BITS_8 at 20000 ns
+%% Alert ERROR   in uarttx_1, Unsupported ParityMode = 2. Using EVEN PARITY at 20000 ns
+%% Alert ERROR   in uarttx_1, Unsupported NumStopBits = 0. Using UARTTB_STOP_BITS_1 at 20000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 10, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 1 at 36000 ns
+%% Log   DEBUG   in uartrx_1, Received: Data = 10, Parity = 1, Stop = 1, Parity Error = 0, Stop Error = 0, Break Error = 0,  Operation # 0 at 119750 ns
+%% Log   PASSED  in uartrx_1, Received: Data = 10, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 1 at 119750 ns
+%% Log   PASSED  in uartrx_1, Between 9 and 11 ElapsedTime = 83750 ns at 119750 ns
+%% Log   PASSED  in uarttx_1, ElapsedTime (11 Cycles) = 88000 ns at 124000 ns
+
+
+%% Log   INFO    in uartrx_1, Baud set to 12000 ns at 127750 ns
+%% Log   INFO    in uartrx_1, NumDataBits set to UARTTB_DATA_BITS_6 at 127750 ns
+%% Log   INFO    in uartrx_1, ParityMode set to UARTTB_PARITY_ODD at 127750 ns
+%% Log   INFO    in uartrx_1, NumStopBits set to UARTTB_STOP_BITS_2 at 127750 ns
+%% Log   INFO    in uarttx_1, Baud set to 12000 ns at 132000 ns
+%% Log   INFO    in uarttx_1, NumDataBits set to UARTTB_DATA_BITS_6 at 132000 ns
+%% Log   INFO    in uarttx_1, ParityMode set to UARTTB_PARITY_ODD at 132000 ns
+%% Log   INFO    in uarttx_1, NumStopBits set to UARTTB_STOP_BITS_2 at 132000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 11, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 2 at 166000 ns
+%% Log   DEBUG   in uartrx_1, Received: Data = 11, Parity = 1, Stop = 1, Parity Error = 0, Stop Error = 0, Break Error = 0,  Operation # 1 at 267875 ns
+%% Log   PASSED  in uartrx_1, Received: Data = 11, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 2 at 267875 ns
+%% Log   PASSED  in uartrx_1, Between 8 and 9 ElapsedTime = 101875 ns at 267875 ns
+%% Log   PASSED  in uarttx_1, ElapsedTime (10 Cycles) = 120000 ns at 286000 ns
+
+
+%% Alert ERROR   in uartrx_1, Unsupported baud = -5000000 ps. Using UART_BAUD_PERIOD_125K at 291875 ns
+%% Alert ERROR   in uartrx_1, Unsupported NumDataBits = 9. Using UARTTB_DATA_BITS_8 at 291875 ns
+%% Alert ERROR   in uartrx_1, Unsupported ParityMode = 10. Using EVEN PARITY at 291875 ns
+%% Alert ERROR   in uartrx_1, Unsupported NumStopBits = 3. Using UARTTB_STOP_BITS_1 at 291875 ns
+%% Alert ERROR   in uarttx_1, Unsupported baud = -5000000 ps. Using UART_BAUD_PERIOD_125K at 298000 ns
+%% Alert ERROR   in uarttx_1, Unsupported NumDataBits = 9. Using UARTTB_DATA_BITS_8 at 298000 ns
+%% Alert ERROR   in uarttx_1, Unsupported ParityMode = 10. Using EVEN PARITY at 298000 ns
+%% Alert ERROR   in uarttx_1, Unsupported NumStopBits = 3. Using UARTTB_STOP_BITS_1 at 298000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 12, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 3 at 316000 ns
+%% Log   DEBUG   in uartrx_1, Received: Data = 12, Parity = 0, Stop = 1, Parity Error = 0, Stop Error = 0, Break Error = 0,  Operation # 2 at 400000 ns
+%% Log   PASSED  in uartrx_1, Received: Data = 12, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 3 at 400000 ns
+%% Log   PASSED  in uartrx_1, Between 10 and 11 ElapsedTime = 84000 ns at 400000 ns
+%% Log   PASSED  in uarttx_1, ElapsedTime (11 Cycles) = 88000 ns at 404000 ns
+
+
+%% Log   INFO    in uartrx_1, Baud set to 4000 ns at 408000 ns
+%% Log   INFO    in uartrx_1, NumDataBits set to UARTTB_DATA_BITS_7 at 408000 ns
+%% Log   INFO    in uartrx_1, ParityMode set to UARTTB_PARITY_ODD at 408000 ns
+%% Log   INFO    in uartrx_1, NumStopBits set to UARTTB_STOP_BITS_1 at 408000 ns
+%% Log   INFO    in uarttx_1, Baud set to 4000 ns at 412000 ns
+%% Log   INFO    in uarttx_1, NumDataBits set to UARTTB_DATA_BITS_7 at 412000 ns
+%% Log   INFO    in uarttx_1, ParityMode set to UARTTB_PARITY_ODD at 412000 ns
+%% Log   INFO    in uarttx_1, NumStopBits set to UARTTB_STOP_BITS_1 at 412000 ns
+%% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 13, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 4 at 422000 ns
+%% Log   DEBUG   in uartrx_1, Received: Data = 13, Parity = 0, Stop = 1, Parity Error = 0, Stop Error = 0, Break Error = 0,  Operation # 3 at 459875 ns
+%% Log   PASSED  in uartrx_1, Received: Data = 13, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 4 at 459875 ns
+%% Log   PASSED  in uartrx_1, Between 9 and 10 ElapsedTime = 37875 ns at 459875 ns
+%% Log   PASSED  in uarttx_1, ElapsedTime (10 Cycles) = 40000 ns at 462000 ns

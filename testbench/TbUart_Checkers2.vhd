@@ -1,6 +1,6 @@
 --
---  File Name:         TbUart_SendGet1.vhd
---  Design Unit Name:  TbUart_SendGet1
+--  File Name:         TbUart_Checkers2.vhd
+--  Design Unit Name:  TbUart_Checkers2
 --  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -9,7 +9,8 @@
 --
 --
 --  Description:
---    Validate send, get, check transactions with errors in PE, SE, and BE 
+--    Validate SendAsync, TryGet, TryCheck transactions with every error type
+--      Patterned from TbUart_Checkers1.vhd
 --
 --
 --  Developed by:
@@ -37,7 +38,7 @@
 -- limitations under the License.
 --
 
-architecture SendGet1 of TestCtrl is
+architecture Checkers2 of TestCtrl is
 
   signal CheckErrors : boolean ;
   signal TestActive  : boolean := TRUE ;
@@ -56,13 +57,13 @@ begin
   ControlProc : process
   begin
     -- Initialization of test
-    SetAlertLogName("TbUart_SendGet1") ;
+    SetAlertLogName("TbUart_Checkers2") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
     UartScoreboard.SetAlertLogID("UART_SB1") ; 
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen("./results/TbUart_SendGet1.txt") ;
+    TranscriptOpen("./results/TbUart_Checkers2.txt") ;
     SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
@@ -75,27 +76,27 @@ begin
     AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
-    AlertIfDiff("./results/TbUart_SendGet1.txt", "../Uart/testbench/validated_results/TbUart_SendGet1.txt", "") ; 
+    AlertIfDiff("./results/TbUart_Checkers2.txt", "../Uart/testbench/validated_results/TbUart_Checkers2.txt", "") ; 
     
     print("") ;
-    ReportAlerts(ExternalErrors => (FAILURE => 0, ERROR => -4, WARNING => 0)) ; 
+    ReportAlerts(ExternalErrors => (FAILURE => 0, ERROR => -15, WARNING => 0)) ; 
     print("") ;
     std.env.stop ; 
     wait ; 
   end process ControlProc ; 
 
   ------------------------------------------------------------
-  -- UartTbTxProc
+  -- UartTxProc
   --   Provides transactions to UartTx via Send
   --   Used to test the UART Receiver in the UUT
   ------------------------------------------------------------
-  UartTbTxProc : process
-    variable UartTxID : AlertLogIDType ; 
+  UartTxProc : process
+    variable TxProcID : AlertLogIDType ; 
     variable TransactionCount, ErrorCount : integer ;
   begin
     
-    GetAlertLogID(UartTxRec, UartTxID) ; 
-    SetLogEnable(UartTxID, INFO, TRUE) ;
+    TxProcID := GetAlertLogID("UartTxProc") ;
+
     WaitForClock(UartTxRec, 2) ; 
     
     --  Sequence 1
@@ -104,11 +105,11 @@ begin
     Send(UartTxRec, X"52", UARTTB_STOP_ERROR) ;
     Send(UartTxRec, X"53", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
     Send(UartTxRec, X"11", UARTTB_BREAK_ERROR) ;
-    
+        
     GetTransactionCount(UartTxRec, TransactionCount) ;
-    AffirmIfEqual(UartTxID, TransactionCount, 5, "Transaction Count") ;
+    AffirmIfEqual(TxProcID, TransactionCount, 5, "Transaction Count") ;
     GetErrorCount(UartTxRec, ErrorCount) ;
-    AffirmIfEqual(UartTxID, ErrorCount, 0, "Error Count") ;
+    AffirmIfEqual(TxProcID, ErrorCount, 0, "Error Count") ;
     
     --  Sequence 2
     Send(UartTxRec, X"60", UARTTB_NO_ERROR) ;
@@ -125,17 +126,10 @@ begin
     Send(UartTxRec, X"13", UARTTB_BREAK_ERROR) ;
     
     --  Sequence 4
-    Send(UartTxRec, X"80") ;
-    Send(UartTxRec, X"81", UARTTB_PARITY_ERROR) ;
-    Send(UartTxRec, X"82", UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"83", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-    Send(UartTxRec, X"14", UARTTB_BREAK_ERROR) ;
+    Send(UartTxRec, X"80", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+    Send(UartTxRec, X"81", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
     WaitForClock(UartTxRec, 8) ;
     
-    GetTransactionCount(UartTxRec, TransactionCount) ;
-    AffirmIfEqual(UartTxID, TransactionCount, 20, "Transaction Count") ;
-    GetErrorCount(UartTxRec, ErrorCount) ;
-    AffirmIfEqual(UartTxID, ErrorCount, 0, "Error Count") ;  -- Nonsence test since TX does not check
 
     TestActive <= FALSE ;  -- last one 
 
@@ -144,7 +138,7 @@ begin
     wait for 4 * UART_BAUD_PERIOD_115200 ;
     WaitForBarrier(TestDone) ;
     wait ;
-  end process UartTbTxProc ;
+  end process UartTxProc ;
 
 
   ------------------------------------------------------------
@@ -156,82 +150,97 @@ begin
     variable RxStim, ExpectStim : UartStimType ; 
     variable Available, TryExpectValid : boolean ;
 
-    variable UartRxID : AlertLogIDType ; 
+    variable RxProcID : AlertLogIDType ; 
     variable TransactionCount, ErrorCount : integer ;
   begin
     
-    GetAlertLogID(UartRxRec, UartRxID) ; 
+    RxProcID := GetAlertLogID("TB UartRxProc") ;
     WaitForClock(UartRxRec, 2) ; 
 
+    -- Validate TryCheck with 1 parameter with data errors, expecting 5 errors
+    -- SendGet1 already tests Check with 1 parameter with parity, stop, parity+stop, and break errors
     for i in 1 to 5 loop     
       case i is
-        when 1 =>  ExpectStim := (X"50", UARTTB_NO_ERROR) ;
-        when 2 =>  ExpectStim := (X"51", UARTTB_PARITY_ERROR) ;
-        when 3 =>  ExpectStim := (X"52", UARTTB_STOP_ERROR) ;
-        when 4 =>  ExpectStim := (X"53", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-        when 5 =>  ExpectStim := (X"00", UARTTB_BREAK_ERROR) ;
+        when 1 =>  ExpectStim := (X"40", UARTTB_NO_ERROR) ;
+        when 2 =>  ExpectStim := (X"41", UARTTB_PARITY_ERROR) ;
+        when 3 =>  ExpectStim := (X"42", UARTTB_STOP_ERROR) ;
+        when 4 =>  ExpectStim := (X"43", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+        when 5 =>  ExpectStim := (X"40", UARTTB_BREAK_ERROR) ;
       end case ; 
-      -- Get with one parameter
-      Get(UartRxRec, RxStim.Data) ;
-      RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
-      AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
-        "Received: " & to_string(RxStim), 
-        ".  Expected: " & to_string(ExpectStim) ) ;
+      -- Check with one parameter
+      loop      
+        WaitForTransaction(UartRxRec) ;
+        TryCheck(UartRxRec, ExpectStim.Data, Available) ;
+        exit when Available ;
+        Alert("TryCheck Failed to return data", FAILURE) ;
+      end loop ;
     end loop ;
-    
-    for i in 1 to 5 loop     
-      case i is
-        when 1 =>  ExpectStim := (X"60", UARTTB_NO_ERROR) ;
-        when 2 =>  ExpectStim := (X"61", UARTTB_PARITY_ERROR) ;
-        when 3 =>  ExpectStim := (X"62", UARTTB_STOP_ERROR) ;
-        when 4 =>  ExpectStim := (X"63", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-        when 5 =>  ExpectStim := (X"64", UARTTB_BREAK_ERROR) ;
-      end case ; 
-      -- Get with two parameters
-      Get(UartRxRec, RxStim.Data, RxStim.Error) ;
-      AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
-        "Received: " & to_string(RxStim), 
-        ".  Expected: " & to_string(ExpectStim) ) ;
-    end loop ;
-    
+    AffirmIf(GetAlertCount = 5, "Expecting 5 Errors") ; 
     GetTransactionCount(UartRxRec, TransactionCount) ;
-    AffirmIfEqual(UartRxID, TransactionCount, 10, "Transaction Count") ;
+    AffirmIfEqual(RxProcID, TransactionCount, 5, "Transaction Count") ;
     GetErrorCount(UartRxRec, ErrorCount) ;
-    AffirmIfEqual(UartRxID, ErrorCount, 0, "Error Count") ;
+    AffirmIfEqual(RxProcID, ErrorCount, 5, "Expecting 5 Errors,") ;
+    
+    
+    -- Validate Check with 2 parameters with data errors, expecting 4 errors
+    -- Break error will pass
+    for i in 1 to 5 loop     
+      case i is
+        when 1 =>  ExpectStim := (X"40", UARTTB_NO_ERROR) ;
+        when 2 =>  ExpectStim := (X"41", UARTTB_PARITY_ERROR) ;
+        when 3 =>  ExpectStim := (X"42", UARTTB_STOP_ERROR) ;
+        when 4 =>  ExpectStim := (X"43", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
+        when 5 =>  ExpectStim := (X"44", UARTTB_BREAK_ERROR) ;
+      end case ; 
+      -- Check with two parameters
+      loop      
+        WaitForTransaction(UartRxRec) ;
+        TryCheck(UartRxRec, ExpectStim.Data, ExpectStim.Error, Available) ;
+        exit when Available ;
+        Alert("TryCheck Failed to return data", FAILURE) ;
+      end loop ;
+    end loop ;
+    GetTransactionCount(UartRxRec, TransactionCount) ;
+    AffirmIfEqual(RxProcID, TransactionCount, 10, "Transaction Count") ;
+    GetErrorCount(UartRxRec, ErrorCount) ;
+    AffirmIfEqual(RxProcID, ErrorCount, 9, "Expecting 9 Errors,") ;
         
+    -- Validate Check with 2 parameters with PE, SE, PE+SE, and BE errors, expecting 4 errors
     for i in 1 to 5 loop     
       case i is
         when 1 =>  ExpectStim := (X"70", UARTTB_NO_ERROR) ;
-        when 2 =>  ExpectStim := (X"71", UARTTB_PARITY_ERROR) ;
-        when 3 =>  ExpectStim := (X"72", UARTTB_STOP_ERROR) ;
-        when 4 =>  ExpectStim := (X"73", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-        when 5 =>  ExpectStim := (X"74", UARTTB_BREAK_ERROR) ;
-      end case ; 
-      -- Check with one parameter
-      Check(UartRxRec, ExpectStim.Data) ;
-      RxStim.Data  := std_logic_vector(UartRxRec.DataFromModel) ; 
-      RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
-      AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
-        "Received: " & to_string(RxStim), 
-        ".  Expected: " & to_string(ExpectStim) ) ;
-    end loop ;
-    AffirmIf(GetAlertCount = 4, "Expecting 4 Errors") ; 
-    GetTransactionCount(UartRxRec, TransactionCount) ;
-    AffirmIfEqual(UartRxID, TransactionCount, 15, "Transaction Count") ;
-    GetErrorCount(UartRxRec, ErrorCount) ;
-    AffirmIfEqual(UartRxID, ErrorCount, 4, "Expecting 4 Errors,") ;
-    
-    for i in 1 to 5 loop     
-      case i is
-        when 1 =>  ExpectStim := (X"80", UARTTB_NO_ERROR) ;
-        when 2 =>  ExpectStim := (X"81", UARTTB_PARITY_ERROR) ;
-        when 3 =>  ExpectStim := (X"82", UARTTB_STOP_ERROR) ;
-        when 4 =>  ExpectStim := (X"83", UARTTB_PARITY_ERROR + UARTTB_STOP_ERROR) ;
-        when 5 =>  ExpectStim := (X"00", UARTTB_BREAK_ERROR) ;
+        when 2 =>  ExpectStim := (X"71", UARTTB_NO_ERROR) ;
+        when 3 =>  ExpectStim := (X"72", UARTTB_NO_ERROR) ;
+        when 4 =>  ExpectStim := (X"73", UARTTB_NO_ERROR) ;
+        when 5 =>  ExpectStim := (X"74", UARTTB_NO_ERROR) ;
       end case ; 
       -- Check with two parameters
-      Check(UartRxRec, ExpectStim.Data, ExpectStim.Error) ;
+      loop      
+        WaitForTransaction(UartRxRec) ;
+        TryCheck(UartRxRec, ExpectStim.Data, ExpectStim.Error, Available) ;
+        exit when Available ;
+        Alert("TryCheck Failed to return data", FAILURE) ;
+      end loop ;
     end loop ;
+    GetErrorCount(UartRxRec, ErrorCount) ;
+    AffirmIfEqual(RxProcID, ErrorCount, 13, "Expecting 13 Errors,") ;
+    
+    -- Validate Check with 2 parameters with PE+SE error variations, expecting 2 errors
+    for i in 1 to 2 loop     
+      case i is
+        when 1 =>  ExpectStim := (X"80", UARTTB_PARITY_ERROR) ;
+        when 2 =>  ExpectStim := (X"81", UARTTB_STOP_ERROR) ;
+      end case ; 
+      -- Check with two parameters
+      loop      
+        WaitForTransaction(UartRxRec) ;
+        TryCheck(UartRxRec, ExpectStim.Data, ExpectStim.Error, Available) ;
+        exit when Available ;
+        Alert("TryCheck Failed to return data", FAILURE) ;
+      end loop ;
+    end loop ;
+    GetErrorCount(UartRxRec, ErrorCount) ;
+    AffirmIfEqual(RxProcID, ErrorCount, 15, "Expecting 15 Errors,") ;
 
     --
     ------------------------------------------------------------
@@ -241,11 +250,11 @@ begin
     wait ;
   end process UartTbRxProc ;
 
-end SendGet1 ;
-Configuration TbUart_SendGet1 of TbUart is
+end Checkers2 ;
+Configuration TbUart_Checkers2 of TbUart is
   for TestHarness
     for TestCtrl_1 : TestCtrl
-      use entity work.TestCtrl(SendGet1) ; 
+      use entity work.TestCtrl(Checkers2) ; 
     end for ; 
   end for ; 
-end TbUart_SendGet1 ; 
+end TbUart_Checkers2 ; 
