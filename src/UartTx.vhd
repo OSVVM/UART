@@ -45,8 +45,8 @@ library ieee ;
 library OSVVM ; 
   context OSVVM.OsvvmContext ; 
 
-library osvvm_vip ; 
-  context osvvm_vip.OsvvmVipContext ;  
+library osvvm_common ; 
+  context osvvm_common.OsvvmCommonContext ;  
 
   use work.UartTbPkg.all ;
 

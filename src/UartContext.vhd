@@ -41,8 +41,8 @@
 --
 
 context UartContext is
-    library osvvm_vip ; 
-      context osvvm_vip.OsvvmVipContext ;  
+    library osvvm_common ; 
+    context osvvm_common.OsvvmCommonContext ;  
 
     library osvvm_uart ;  
     use osvvm_uart.UartTbPkg.all ; 
