@@ -18,24 +18,28 @@
 --        http://www.SynthWorks.com
 --
 --  Revision History:
---    Date       Version    Description
---    08/2012    2012.08    Generic Instance of ScoreboardGenericPkg
---    08/2014    2013.08    Updated interface for Match and to_string
---    2019.05    2019.05    Initial public release
+--    Date      Version    Description
+--    08/2012   2012.08    Generic Instance of ScoreboardGenericPkg
+--    08/2014   2013.08    Updated interface for Match and to_string
+--    05/2019   2019.05    Initial public release
+--    01/2020   2020.01    Updated license notice
 --
---      Copyright (c) 2006 - 2019 by SynthWorks Design Inc.  All rights reserved.
 --
--- Licensed under the Apache License, Version 2.0 (the "License");
--- you may not use this file except in compliance with the License.
--- You may obtain a copy of the License at
+--  This file is part of OSVVM.
 --
---     http://www.apache.org/licenses/LICENSE-2.0
+--  Copyright (c) 2012 - 2020 by SynthWorks Design Inc.
 --
--- Unless required by applicable law or agreed to in writing, software
--- distributed under the License is distributed on an "AS IS" BASIS,
--- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
--- See the License for the specific language governing permissions and
--- limitations under the License.
+--  Licensed under the Apache License, Version 2.0 (the "License");
+--  you may not use this file except in compliance with the License.
+--  You may obtain a copy of the License at
+--
+--      https://www.apache.org/licenses/LICENSE-2.0
+--
+--  Unless required by applicable law or agreed to in writing, software
+--  distributed under the License is distributed on an "AS IS" BASIS,
+--  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+--  See the License for the specific language governing permissions and
+--  limitations under the License.
 --
 
 use work.UartTbPkg.all ; 

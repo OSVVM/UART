@@ -6,7 +6,7 @@
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
 --
 --  Description
---      Context Declaration for OSVVM packages
+--      Context Declaration for UART packages
 --
 --  Developed by/for:
 --        SynthWorks Design Inc.
@@ -14,25 +14,23 @@
 --        11898 SW 128th Ave.  Tigard, Or  97223
 --        http://www.SynthWorks.com
 --
---  Latest standard version available at:
---        http://www.SynthWorks.com/downloads
---
 --  Revision History:      
 --    Date      Version    Description
 --    01/2019   2019.01    Initial Revision
+--    05/2019   2019.05    Updated for OSVVM public release
+--    01/2020   2020.01    Updated license notice
 --
 --
---  Copyright (c) 2017-2019 by SynthWorks Design Inc.  All rights reserved.
+--  This file is part of OSVVM.
 --
---  Verbatim copies of this source file may be used and
---  distributed without restriction.
+--  Copyright (c) 2019 - 2020 by SynthWorks Design Inc.
 --
 --  Licensed under the Apache License, Version 2.0 (the "License");
 --  you may not use this file except in compliance with the License.
 --  You may obtain a copy of the License at
---  
---      http://www.apache.org/licenses/LICENSE-2.0
---  
+--
+--      https://www.apache.org/licenses/LICENSE-2.0
+--
 --  Unless required by applicable law or agreed to in writing, software
 --  distributed under the License is distributed on an "AS IS" BASIS,
 --  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
