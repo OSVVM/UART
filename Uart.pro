@@ -1,4 +1,4 @@
-#  File Name:         Axi4Lite.pro
+#  File Name:         Uart.pro
 #  Revision:          OSVVM MODELS STANDARD VERSION
 #
 #  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -7,7 +7,7 @@
 #
 #
 #  Description:
-#        Script to compile the Axi4 Lite models  
+#        Script to compile the OSVVM UART models  
 #
 #  Developed for:
 #        SynthWorks Design Inc.
