@@ -187,7 +187,7 @@ begin
         Alert("TryGet Failed to return data", FAILURE) ;
       end loop ;
       AlertIf(not TryExpectValid, "TryGet returned too soon") ;
-      RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
+      RxStim.Error := std_logic_vector(UartRxRec.ParamFromModel) ; 
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
         "Received: " & to_string(RxStim), 
         ".  Expected: " & to_string(ExpectStim) ) ;
@@ -253,7 +253,7 @@ begin
       end loop ;
       AlertIf(not TryExpectValid, "TryCheck returned too soon") ;
       RxStim.Data  := std_logic_vector(UartRxRec.DataFromModel) ; 
-      RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
+      RxStim.Error := std_logic_vector(UartRxRec.ParamFromModel) ; 
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
         "Received: " & to_string(RxStim), 
         ".  Expected: " & to_string(ExpectStim) ) ;

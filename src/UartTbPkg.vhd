@@ -76,9 +76,9 @@ package UartTbPkg is
   ------------------------------------------------------------
   subtype UartRecType is StreamRecType (
     DataToModel   (UartTb_DataType'range), 
-    ErrorToModel  (UartTb_ErrorModeType'range), 
+    ParamToModel  (UartTb_ErrorModeType'range), 
     DataFromModel (UartTb_DataType'range), 
-    ErrorFromModel(UartTb_ErrorModeType'range) 
+    ParamFromModel(UartTb_ErrorModeType'range) 
   ) ;
 
 
@@ -308,7 +308,7 @@ package body UartTbPkg is
     constant  Baud           : UartTb_BaudType 
   ) is 
   begin
-    SetOption(TransactionRec, UartOptionType'pos(SET_BAUD), Baud) ;
+    SetModelOptions(TransactionRec, UartOptionType'pos(SET_BAUD), Baud) ;
   end procedure SetUartBaud ; 
 
   ------------------------------------------------------------
@@ -319,7 +319,7 @@ package body UartTbPkg is
     constant  NumDataBits    : UartTb_DataBitsType 
   ) is 
   begin
-    SetOption(TransactionRec, UartOptionType'pos(SET_DATA_BITS), NumDataBits) ;
+    SetModelOptions(TransactionRec, UartOptionType'pos(SET_DATA_BITS), NumDataBits) ;
   end procedure SetUartNumDataBits ; 
 
   ------------------------------------------------------------
@@ -330,7 +330,7 @@ package body UartTbPkg is
     constant  ParityMode     : UartTb_ParityModeType 
   ) is 
   begin
-    SetOption(TransactionRec, UartOptionType'pos(SET_PARITY_MODE), ParityMode) ;
+    SetModelOptions(TransactionRec, UartOptionType'pos(SET_PARITY_MODE), ParityMode) ;
   end procedure SetUartParityMode ; 
 
   ------------------------------------------------------------
@@ -341,7 +341,7 @@ package body UartTbPkg is
     constant  NumStopBits    : UartTb_StopBitsType 
   ) is 
   begin
-    SetOption(TransactionRec, UartOptionType'pos(SET_STOP_BITS), NumStopBits) ;
+    SetModelOptions(TransactionRec, UartOptionType'pos(SET_STOP_BITS), NumStopBits) ;
   end procedure SetUartNumStopBits ; 
 
   ------------------------------------------------------------

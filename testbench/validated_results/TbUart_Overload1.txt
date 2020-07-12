@@ -9,7 +9,7 @@
 %% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 11, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 5 at 388000 ns
 %% Log   PASSED  in Default, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1 at 471750 ns
 %% Log   PASSED  in uarttx_1, Transaction Count Received : 5 at 532000 ns
-%% DONE  PASSED  uarttx_1  Affirmations Checked: 6  at 532000 ns
+%% DONE  PASSED  uarttx_1  Passed: 1  Affirmations Checked: 1  at 532000 ns
 %% Log   PASSED  in uarttx_1, Error Count Received : 0 at 532000 ns
 %% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 60, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 6 at 532000 ns
 %% Log   PASSED  in Default, Received: Data = 60, Parity Error: 0, Stop Error: 0, Break Error: 0 at 615750 ns
@@ -22,7 +22,7 @@
 %% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 12, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 10 at 900000 ns
 %% Log   PASSED  in Default, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1 at 983750 ns
 %% Log   PASSED  in uartrx_1, Transaction Count Received : 10 at 983750 ns
-%% DONE  PASSED  uartrx_1  Affirmations Checked: 13  at 983750 ns
+%% DONE  PASSED  uartrx_1  Passed: 1  Affirmations Checked: 1  at 983750 ns
 %% Log   PASSED  in uartrx_1, Error Count Received : 0 at 983750 ns
 %% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 70, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 11 at 1052000 ns
 %% Log   PASSED  in uartrx_1, Received: Data = 70, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 11 at 1135750 ns
@@ -41,7 +41,7 @@
 %% Log   PASSED  in Default, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1 at 1503750 ns
 %% Log   PASSED  in Default, Expecting 4 Errors at 1503750 ns
 %% Log   PASSED  in uartrx_1, Transaction Count Received : 15 at 1503750 ns
-%% DONE  FAILED  uartrx_1  Total Error(s) = 4  Failures: 0  Errors: 4  Warnings: 0  Affirmations Checked: 26  at 1503750 ns
+%% DONE  FAILED  uartrx_1  Total Error(s) = 4  Failures: 0  Errors: 4  Warnings: 0  Passed: 4  Affirmations Checked: 8  at 1503750 ns
 %% Log   PASSED  in uartrx_1, Expecting 4 Errors, Received : 4 at 1503750 ns
 %% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 80, Parity Error: 0, Stop Error: 0, Break Error: 0  Operation # 16 at 1580000 ns
 %% Log   PASSED  in uartrx_1, Received: Data = 80, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 16 at 1663750 ns
@@ -54,5 +54,5 @@
 %% Log   INFO    in uarttx_1, SEND Queueing Transaction: Data = 14, Parity Error: 0, Stop Error: 0, Break Error: 1  Operation # 20 at 1948000 ns
 %% Log   PASSED  in uartrx_1, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1.  Operation # 20 at 2031750 ns
 %% Log   PASSED  in uarttx_1, Transaction Count Received : 20 at 2180000 ns
-%% DONE  PASSED  uarttx_1  Affirmations Checked: 33  at 2180000 ns
+%% DONE  PASSED  uarttx_1  Passed: 3  Affirmations Checked: 3  at 2180000 ns
 %% Log   PASSED  in uarttx_1, Error Count Received : 0 at 2180000 ns

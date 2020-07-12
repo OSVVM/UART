@@ -177,7 +177,7 @@ begin
       end case ; 
       -- Get with one parameter
       Get(UartRxRec, RxStim.Data) ;
-      RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
+      RxStim.Error := std_logic_vector(UartRxRec.ParamFromModel) ; 
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
         "Received: " & to_string(RxStim), 
         ".  Expected: " & to_string(ExpectStim) ) ;
@@ -214,7 +214,7 @@ begin
       -- Check with one parameter
       Check(UartRxRec, ExpectStim.Data) ;
       RxStim.Data  := std_logic_vector(UartRxRec.DataFromModel) ; 
-      RxStim.Error := std_logic_vector(UartRxRec.ErrorFromModel) ; 
+      RxStim.Error := std_logic_vector(UartRxRec.ParamFromModel) ; 
       AffirmIf(osvvm_UART.UartTbPkg.Match(RxStim, ExpectStim), 
         "Received: " & to_string(RxStim), 
         ".  Expected: " & to_string(ExpectStim) ) ;

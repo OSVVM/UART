@@ -157,12 +157,12 @@ begin
             -- Put Data into record
             (RxStim.Data, RxStim.Error) := ReceiveFifo.pop ;
             TransactionRec.DataFromModel   <= std_logic_vector_max_c(RxStim.Data) ; 
-            TransactionRec.ErrorFromModel  <= std_logic_vector_max_c(RxStim.Error) ; 
+            TransactionRec.ParamFromModel  <= std_logic_vector_max_c(RxStim.Error) ; 
             
             if IsCheck(Operation) then
               ExpectedStim := 
                 (Data  => std_logic_vector(TransactionRec.DataToModel), 
-                 Error => std_logic_vector(TransactionRec.ErrorToModel)) ;
+                 Error => std_logic_vector(TransactionRec.ParamToModel)) ;
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 
@@ -197,14 +197,14 @@ begin
           wait for (WaitCycles * Baud) - 1 ns ;
           wait until Uart16XClk = '1' ;
           
-        when GET_ALERT_LOG_ID =>
+        when GET_ALERTLOG_ID =>
           TransactionRec.IntFromModel <= ModelID ;
 
         when GET_TRANSACTION_COUNT =>
           TransactionRec.IntFromModel <= ReceiveCount ;
 
-        when SET_OPTIONS =>
-          case TransactionRec.Option is
+        when SET_MODEL_OPTIONS =>
+          case TransactionRec.Options is
             when UartOptionType'pos(SET_PARITY_MODE) => 
               ParityMode    <= CheckParityMode(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
             when UartOptionType'pos(SET_STOP_BITS) =>
@@ -214,7 +214,7 @@ begin
             when UartOptionType'pos(SET_BAUD) =>
               Baud          <= CheckBaud(ModelID, TransactionRec.TimeToModel, TransactionRec.BoolToModel) ;  
             when others =>     
-              alert(ModelID, "SetOptions: " & to_string(TransactionRec.Option) & ". Unsupported Option was Ignored", ERROR) ;
+              alert(ModelID, "SetOptions: " & to_string(TransactionRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
           end case ; 
         
         when others =>
@@ -305,7 +305,7 @@ begin
   UartDataHandler : process
     variable RxData    : std_logic_vector(7 downto 0) ;
     variable RxParity  : std_logic ;
-    variable ErrorMode : std_logic_vector(TransactionRec.ErrorFromModel'range) ;
+    variable ErrorMode : std_logic_vector(TransactionRec.ParamFromModel'range) ;
   begin
     wait on Uart16XClk until Uart16XClk = '1' and SampleBit = '1' ;
     case RxState is

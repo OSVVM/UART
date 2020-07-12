@@ -127,7 +127,7 @@ begin
       case Operation is
         when SEND | SEND_ASYNC =>
           TxStim.Data  := std_logic_vector(TransactionRec.DataToModel) ;
-          TxStim.Error := std_logic_vector(TransactionRec.ErrorToModel) ;
+          TxStim.Error := std_logic_vector(TransactionRec.ParamToModel) ;
           TransmitFifo.Push(TxStim.Data & TxStim.Error) ;
           Log(ModelID, 
             "SEND Queueing Transaction: " & to_string(TxStim) & 
@@ -152,14 +152,14 @@ begin
           wait for (WaitCycles * Baud) - 1 ns ;
           wait until UartTxClk = '1' ;
           
-        when GET_ALERT_LOG_ID =>
+        when GET_ALERTLOG_ID =>
           TransactionRec.IntFromModel <= ModelID ;
 
         when GET_TRANSACTION_COUNT =>
           TransactionRec.IntFromModel <= TransmitDoneCount ;
 
-        when SET_OPTIONS =>
-          case TransactionRec.Option is
+        when SET_MODEL_OPTIONS =>
+          case TransactionRec.Options is
             when UartOptionType'pos(SET_PARITY_MODE) => 
               ParityMode    <= CheckParityMode(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
             when UartOptionType'pos(SET_STOP_BITS) =>
@@ -169,7 +169,7 @@ begin
             when UartOptionType'pos(SET_BAUD) =>
               Baud          <= CheckBaud(ModelID, TransactionRec.TimeToModel, TransactionRec.BoolToModel) ;  
             when others =>     
-              alert(ModelID, "SetOptions: " & to_string(TransactionRec.Option) & ". Unsupported Option was Ignored", ERROR) ;
+              alert(ModelID, "SetOptions: " & to_string(TransactionRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
           end case ; 
         
         when others =>
