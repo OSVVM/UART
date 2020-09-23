@@ -7,7 +7,7 @@
 #
 #
 #  Description:
-#        Script to compile and run the UART testbench  
+#        Script to run one UART test
 #
 #  Developed for:
 #        SynthWorks Design Inc.
@@ -50,10 +50,10 @@ analyze  TbUart_Scoreboard1.vhd
 analyze  TbUart_Overload1.vhd
 
 simulate TbUart_SendGet1
-simulate TbUart_SendGet2
-simulate TbUart_Options1
-simulate TbUart_Options2
-simulate TbUart_Checkers1
-simulate TbUart_Checkers2
-simulate TbUart_Scoreboard1
-simulate TbUart_Overload1
+# simulate TbUart_SendGet2
+# simulate TbUart_Options1
+# simulate TbUart_Options2
+# simulate TbUart_Checkers1
+# simulate TbUart_Checkers2
+# simulate TbUart_Scoreboard1
+# simulate TbUart_Overload1
