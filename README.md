@@ -39,7 +39,7 @@ See OSVVM-Common repository, file Common/src/StreamTransactionPkg.vhd
    * UartRxComponentPkg.vhd
       * Package containing a component declaration for UART Receiver verification component. 
    * UartContext.vhd
-      * References all packages required to use the UART verificaton components
+      * References all packages required to use the UART verification components
    * UartTx.vhd
       * UART Transmitter verification component. 
    * UartRx.vhd
@@ -86,10 +86,10 @@ Download the entire OSVVM model library using git clone with the "--recursive" f
 
 The OSVVM project welcomes your participation with either 
 issue reports or pull requests.
-For details on [how to participate see](https://github.com/osvvm/OsvvmLibraries/-/blob/master/CONTRIBUTING.md)
+For details on [how to participate see](https://opensource.ieee.org/osvvm/OsvvmLibraries/-/blob/master/CONTRIBUTING.md)
 
-You can find the project [Authors here](https://github.com/osvvm/OsvvmLibraries/-/blob/master/AUTHORS.md) and
-[Contributors here](https://github.com/osvvm/OsvvmLibraries/-/blob/master/CONTRIBUTORS.md).
+You can find the project [Authors here](AUTHORS.md) and
+[Contributors here](CONTRIBUTORS.md).
 
 ## More Information on OSVVM
 
