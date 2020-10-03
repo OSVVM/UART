@@ -128,6 +128,9 @@ begin
         when SEND | SEND_ASYNC =>
           TxStim.Data  := std_logic_vector(TransactionRec.DataToModel) ;
           TxStim.Error := std_logic_vector(TransactionRec.ParamToModel) ;
+          if TxStim.Error(TxStim.Error'right) = '-' then 
+            TxStim.Error := (TxStim.Error'range => '0') ;
+          end if ; 
           TransmitFifo.Push(TxStim.Data & TxStim.Error) ;
           Log(ModelID, 
             "SEND Queueing Transaction: " & to_string(TxStim) & 
