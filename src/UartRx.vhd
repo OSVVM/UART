@@ -120,12 +120,12 @@ begin
   --    Dispatches transactions to
   ------------------------------------------------------------
   TransactionDispatcher : process
-    variable Operation : TransactionRec.Operation'subtype ;
+    alias Operation : StreamOperationType is TransRec.Operation ;
     variable WaitCycles : integer ;
     variable RxStim, ExpectedStim : UartStimType ;
   begin
     wait for 0 ns ; -- Let ModelID get set
-    -- Initialize
+    -- Initialize defaults
     ParityMode    <= CheckParityMode (ModelID, DEFAULT_PARITY_MODE,   FALSE) ; 
     NumStopBits   <= CheckNumStopBits(ModelID, DEFAULT_NUM_STOP_BITS, FALSE) ; 
     NumDataBits   <= CheckNumDataBits(ModelID, DEFAULT_NUM_DATA_BITS, FALSE) ; 
@@ -138,23 +138,25 @@ begin
          Ack      => TransactionRec.Ack
       ) ;
       
-      Operation := TransactionRec.Operation ;
+--**      Operation := TransactionRec.Operation ;
       
       case Operation is
         when GET | TRY_GET | CHECK | TRY_CHECK =>
           if ReceiveFifo.empty and IsTry(Operation) then
             -- Return if no data
-            TransactionRec.IntFromModel <= 0 ; 
+            TransactionRec.BoolFromModel <= FALSE ; 
           else
             -- Get data
-            TransactionRec.IntFromModel <= 1 ; 
+            TransactionRec.BoolFromModel <= TRUE ; 
             if ReceiveFifo.empty then 
               -- Wait for data
               WaitForToggle(ReceiveCount) ;
             else 
-              wait for 0 ns ; -- allow ReceiveCount to settle if both happen at same time.
+              -- Settling for when not Empty at current time, but ReceiveCount not updated yet
+              -- ReceiveCount used in reporting below.
+              wait for 0 ns ; 
             end if ; 
-            -- Put Data into record
+            -- Put Data and Parameters into record
             (RxStim.Data, RxStim.Error) := ReceiveFifo.pop ;
             TransactionRec.DataFromModel   <= std_logic_vector_max_c(RxStim.Data) ; 
             TransactionRec.ParamFromModel  <= std_logic_vector_max_c(RxStim.Error) ; 
