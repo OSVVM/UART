@@ -67,6 +67,7 @@ entity UartRx is
     TransactionRec         : InOut UartRecType ;
     SerialDataIn           : In    std_logic
   ) ;
+  alias TransRec : UartRecType is TransactionRec ; 
 end UartRx ;
 architecture model of UartRx is
 
@@ -134,20 +135,20 @@ begin
     TransactionDispatcherLoop : loop 
       WaitForTransaction(
          Clk      => Uart16XClk,
-         Rdy      => TransactionRec.Rdy,
-         Ack      => TransactionRec.Ack
+         Rdy      => TransRec.Rdy,
+         Ack      => TransRec.Ack
       ) ;
       
---**      Operation := TransactionRec.Operation ;
+--**      Operation := TransRec.Operation ;
       
       case Operation is
         when GET | TRY_GET | CHECK | TRY_CHECK =>
           if ReceiveFifo.empty and IsTry(Operation) then
             -- Return if no data
-            TransactionRec.BoolFromModel <= FALSE ; 
+            TransRec.BoolFromModel <= FALSE ; 
           else
             -- Get data
-            TransactionRec.BoolFromModel <= TRUE ; 
+            TransRec.BoolFromModel <= TRUE ; 
             if ReceiveFifo.empty then 
               -- Wait for data
               WaitForToggle(ReceiveCount) ;
@@ -158,18 +159,18 @@ begin
             end if ; 
             -- Put Data and Parameters into record
             (RxStim.Data, RxStim.Error) := ReceiveFifo.pop ;
-            TransactionRec.DataFromModel   <= std_logic_vector_max_c(RxStim.Data) ; 
-            TransactionRec.ParamFromModel  <= std_logic_vector_max_c(RxStim.Error) ; 
+            TransRec.DataFromModel   <= std_logic_vector_max_c(RxStim.Data) ; 
+            TransRec.ParamFromModel  <= std_logic_vector_max_c(RxStim.Error) ; 
             
             if IsCheck(Operation) then
               ExpectedStim := 
-                (Data  => std_logic_vector(TransactionRec.DataToModel), 
-                 Error => std_logic_vector(TransactionRec.ParamToModel)) ;
+                (Data  => std_logic_vector(TransRec.DataToModel), 
+                 Error => std_logic_vector(TransRec.ParamToModel)) ;
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 
                   ".  Operation # " & to_string(ReceiveCount),
-                  TransactionRec.BoolToModel or IsLogEnabled(ModelID, INFO) ) ;
+                  TransRec.BoolToModel or IsLogEnabled(ModelID, INFO) ) ;
               else
                 AffirmError(ModelID,
                   "Received: " & to_string(RxStim) & 
@@ -180,7 +181,7 @@ begin
               Log(ModelID, 
                 "Received: " & to_string(RxStim) & 
                 ".  Operation # " & to_string(ReceiveCount),
-                INFO, Enable => TransactionRec.BoolToModel
+                INFO, Enable => TransRec.BoolToModel
               ) ; 
             end if ;
           end if ; 
@@ -191,7 +192,7 @@ begin
           end if ; 
 
         when WAIT_FOR_CLOCK =>
-          WaitCycles := TransactionRec.IntToModel ;
+          WaitCycles := TransRec.IntToModel ;
           -- Log(ModelID, 
           --   "WaitForClock:  WaitCycles = " & to_string(WaitCycles),
           --   INFO
@@ -200,23 +201,23 @@ begin
           wait until Uart16XClk = '1' ;
           
         when GET_ALERTLOG_ID =>
-          TransactionRec.IntFromModel <= ModelID ;
+          TransRec.IntFromModel <= ModelID ;
 
         when GET_TRANSACTION_COUNT =>
-          TransactionRec.IntFromModel <= ReceiveCount ;
+          TransRec.IntFromModel <= ReceiveCount ;
 
         when SET_MODEL_OPTIONS =>
-          case TransactionRec.Options is
+          case TransRec.Options is
             when UartOptionType'pos(SET_PARITY_MODE) => 
-              ParityMode    <= CheckParityMode(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
+              ParityMode    <= CheckParityMode(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_STOP_BITS) =>
-              NumStopBits   <= CheckNumStopBits(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
+              NumStopBits   <= CheckNumStopBits(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_DATA_BITS) =>      
-              NumDataBits   <= CheckNumDataBits(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
+              NumDataBits   <= CheckNumDataBits(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_BAUD) =>
-              Baud          <= CheckBaud(ModelID, TransactionRec.TimeToModel, TransactionRec.BoolToModel) ;  
+              Baud          <= CheckBaud(ModelID, TransRec.TimeToModel, TransRec.BoolToModel) ;  
             when others =>     
-              alert(ModelID, "SetOptions: " & to_string(TransactionRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
+              alert(ModelID, "SetOptions: " & to_string(TransRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
           end case ; 
         
         when others =>
@@ -307,7 +308,7 @@ begin
   UartDataHandler : process
     variable RxData    : std_logic_vector(7 downto 0) ;
     variable RxParity  : std_logic ;
-    variable ErrorMode : std_logic_vector(TransactionRec.ParamFromModel'range) ;
+    variable ErrorMode : std_logic_vector(TransRec.ParamFromModel'range) ;
   begin
     wait on Uart16XClk until Uart16XClk = '1' and SampleBit = '1' ;
     case RxState is

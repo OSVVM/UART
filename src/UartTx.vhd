@@ -66,6 +66,7 @@ entity UartTx is
 
     SerialDataOut       : Out   std_logic := '1' 
   ) ;
+  alias TransRec : UartRecType is TransactionRec ; 
 end UartTx ;
 architecture model of UartTx is
 
@@ -104,7 +105,7 @@ begin
   --    Dispatches transactions to
   ------------------------------------------------------------
   TransactionDispatcher : process
-    variable Operation : TransactionRec.Operation'subtype ;
+    alias Operation : StreamOperationType is TransRec.Operation ;
     variable WaitCycles : integer ;
     variable TxStim : UartStimType ;
   begin
@@ -118,16 +119,16 @@ begin
     TransactionDispatcherLoop : loop 
       WaitForTransaction(
          Clk      => UartTxClk,
-         Rdy      => TransactionRec.Rdy,
-         Ack      => TransactionRec.Ack
+         Rdy      => TransRec.Rdy,
+         Ack      => TransRec.Ack
       ) ;
       
-      Operation := TransactionRec.Operation ;
+--!      Operation := TransRec.Operation ;
       
       case Operation is
         when SEND | SEND_ASYNC =>
-          TxStim.Data  := std_logic_vector(TransactionRec.DataToModel) ;
-          TxStim.Error := std_logic_vector(TransactionRec.ParamToModel) ;
+          TxStim.Data  := std_logic_vector(TransRec.DataToModel) ;
+          TxStim.Error := std_logic_vector(TransRec.ParamToModel) ;
           if TxStim.Error(TxStim.Error'right) = '-' then 
             TxStim.Error := (TxStim.Error'range => '0') ;
           end if ; 
@@ -135,7 +136,7 @@ begin
           Log(ModelID, 
             "SEND Queueing Transaction: " & to_string(TxStim) & 
             "  Operation # " & to_string(TransmitRequestCount + 1),
-            INFO, Enable => TransactionRec.BoolToModel
+            INFO, Enable => TransRec.BoolToModel
           ) ; 
           Increment(TransmitRequestCount) ;
           wait for 0 ns ; 
@@ -151,28 +152,28 @@ begin
           end if ; 
 
         when WAIT_FOR_CLOCK =>
-          WaitCycles := TransactionRec.IntToModel ;
+          WaitCycles := TransRec.IntToModel ;
           wait for (WaitCycles * Baud) - 1 ns ;
           wait until UartTxClk = '1' ;
           
         when GET_ALERTLOG_ID =>
-          TransactionRec.IntFromModel <= ModelID ;
+          TransRec.IntFromModel <= ModelID ;
 
         when GET_TRANSACTION_COUNT =>
-          TransactionRec.IntFromModel <= TransmitDoneCount ;
+          TransRec.IntFromModel <= TransmitDoneCount ;
 
         when SET_MODEL_OPTIONS =>
-          case TransactionRec.Options is
+          case TransRec.Options is
             when UartOptionType'pos(SET_PARITY_MODE) => 
-              ParityMode    <= CheckParityMode(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
+              ParityMode    <= CheckParityMode(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_STOP_BITS) =>
-              NumStopBits   <= CheckNumStopBits(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
+              NumStopBits   <= CheckNumStopBits(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_DATA_BITS) =>      
-              NumDataBits   <= CheckNumDataBits(ModelID, TransactionRec.IntToModel, TransactionRec.BoolToModel) ; 
+              NumDataBits   <= CheckNumDataBits(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_BAUD) =>
-              Baud          <= CheckBaud(ModelID, TransactionRec.TimeToModel, TransactionRec.BoolToModel) ;  
+              Baud          <= CheckBaud(ModelID, TransRec.TimeToModel, TransRec.BoolToModel) ;  
             when others =>     
-              alert(ModelID, "SetOptions: " & to_string(TransactionRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
+              alert(ModelID, "SetOptions: " & to_string(TransRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
           end case ; 
         
         when others =>
@@ -185,7 +186,7 @@ begin
 
   ------------------------------------------------------------
   -- Uart Clock
-  --   Period = TransactionRec.Baud 
+  --   Period = TransRec.Baud 
   ------------------------------------------------------------
   UartTxClk <= not UartTxClk after Baud / 2 ; 
 
