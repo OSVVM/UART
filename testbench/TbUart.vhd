@@ -113,7 +113,7 @@ begin
   UartTx_1 : UartTx 
   ------------------------------------------------------------
   port map (
-    TransactionRec      => UartTxRec,
+    TransRec            => UartTxRec,
     SerialDataOut       => SerialData   
   ) ;
 
@@ -122,7 +122,7 @@ begin
   UartRx_1 : UartRx 
   ------------------------------------------------------------
   port map (
-    TransactionRec      => UartRxRec,
+    TransRec            => UartRxRec,
     SerialDataIn        => SerialData 
   ) ;
 
