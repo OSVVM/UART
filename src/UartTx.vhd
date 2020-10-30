@@ -62,11 +62,9 @@ entity UartTx is
     DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1  
   ) ;
   port (
-    TransactionRec      : InOut UartRecType ;
-
-    SerialDataOut       : Out   std_logic := '1' 
+    TransRec          : InOut UartRecType ;
+    SerialDataOut     : Out   std_logic := '1' 
   ) ;
-  alias TransRec : UartRecType is TransactionRec ; 
 end UartTx ;
 architecture model of UartTx is
 
@@ -128,10 +126,10 @@ begin
       case Operation is
         when SEND | SEND_ASYNC =>
           TxStim.Data  := std_logic_vector(TransRec.DataToModel) ;
-          TxStim.Error := std_logic_vector(TransRec.ParamToModel) ;
-          if TxStim.Error(TxStim.Error'right) = '-' then 
-            TxStim.Error := (TxStim.Error'range => '0') ;
-          end if ; 
+          TxStim.Error := to_01(std_logic_vector(TransRec.ParamToModel)) ;
+--          if TxStim.Error(TxStim.Error'right) = '-' then 
+--            TxStim.Error := (TxStim.Error'range => '0') ;
+--          end if ; 
           TransmitFifo.Push(TxStim.Data & TxStim.Error) ;
           Log(ModelID, 
             "SEND Queueing Transaction: " & to_string(TxStim) & 

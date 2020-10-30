@@ -58,8 +58,8 @@ package UartRxComponentPkg is
       DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1  
     ) ;
     port (
-      TransactionRec         : InOut UartRecType ;
-      SerialDataIn           : In    std_logic
+      TransRec         : InOut UartRecType ;
+      SerialDataIn     : In    std_logic
     ) ;
   end component UartRx ;
   

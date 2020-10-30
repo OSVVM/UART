@@ -64,10 +64,9 @@ entity UartRx is
     DEFAULT_NUM_STOP_BITS   : integer := UARTTB_STOP_BITS_1  
   ) ;
   port (
-    TransactionRec         : InOut UartRecType ;
-    SerialDataIn           : In    std_logic
+    TransRec         : InOut UartRecType ;
+    SerialDataIn     : In    std_logic
   ) ;
-  alias TransRec : UartRecType is TransactionRec ; 
 end UartRx ;
 architecture model of UartRx is
 
@@ -165,7 +164,7 @@ begin
             if IsCheck(Operation) then
               ExpectedStim := 
                 (Data  => std_logic_vector(TransRec.DataToModel), 
-                 Error => std_logic_vector(TransRec.ParamToModel)) ;
+                 Error => to_01(std_logic_vector(TransRec.ParamToModel))) ;
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 
