@@ -1,6 +1,8 @@
 # AXI4 Verification Component Change Log
 
 Revision      Date             Comments
+**2020.10**   October 2020     Minor updates for updates to Stream Model Independent Transactions.
+                               Resulted in port name changes - was going to use alias, but did not work in some tools
 **2020.07**   July 2020        Major release.  Now uses StreamTransactionPkg.
 **2020.01**   January 2020     Updated Licenses to Apache for IEEE Open Source
 **2019.05**   May  2019        Updated for OSVVM public release
