@@ -19,9 +19,12 @@
 --
 --  Revision History:
 --    Date      Version    Description
---    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
---    05/2019   2019.05    Updated for OSVVM public release
+--    02/2021   2021.02    Updated for resizing Data and Param to/from TransRec
+--    10/2020   2020.10    Update for updates to stream MIT
+--    07/2020   2020.07    Converted transactions to stream MIT 
 --    01/2020   2020.01    Updated license notice
+--    05/2019   2019.05    Updated for OSVVM public release
+--    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
 --
 --
 --  This file is part of OSVVM.
@@ -125,8 +128,8 @@ begin
       
       case Operation is
         when SEND | SEND_ASYNC =>
-          TxStim.Data  := std_logic_vector(TransRec.DataToModel) ;
-          TxStim.Error := to_01(std_logic_vector(TransRec.ParamToModel)) ;
+          TxStim.Data  := FromTransaction(TransRec.DataToModel, TxStim.Data'length) ;
+          TxStim.Error := to_01(FromTransaction(TransRec.ParamToModel, TxStim.Error'length)) ;
 --          if TxStim.Error(TxStim.Error'right) = '-' then 
 --            TxStim.Error := (TxStim.Error'range => '0') ;
 --          end if ; 

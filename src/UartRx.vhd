@@ -19,9 +19,12 @@
 --
 --  Revision History:
 --    Date      Version    Description
---    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
---    05/2019   2019.05    Updated for OSVVM public release
+--    02/2021   2021.02    Updated for resizing Data and Param to/from TransRec
+--    10/2020   2020.10    Update for updates to stream MIT
+--    07/2020   2020.07    Converted transactions to stream MIT 
 --    01/2020   2020.01    Updated license notice
+--    05/2019   2019.05    Updated for OSVVM public release
+--    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
 --
 --
 --  This file is part of OSVVM.
@@ -158,13 +161,13 @@ begin
             end if ; 
             -- Put Data and Parameters into record
             (RxStim.Data, RxStim.Error) := ReceiveFifo.pop ;
-            TransRec.DataFromModel   <= std_logic_vector_max_c(RxStim.Data) ; 
-            TransRec.ParamFromModel  <= std_logic_vector_max_c(RxStim.Error) ; 
+            TransRec.DataFromModel   <= ToTransaction(RxStim.Data,  TransRec.DataFromModel'length) ; 
+            TransRec.ParamFromModel  <= ToTransaction(RxStim.Error, TransRec.ParamFromModel'length); 
             
             if IsCheck(Operation) then
               ExpectedStim := 
-                (Data  => std_logic_vector(TransRec.DataToModel), 
-                 Error => to_01(std_logic_vector(TransRec.ParamToModel))) ;
+                (Data  => FromTransaction(TransRec.DataToModel, ExpectedStim.Data'length), 
+                 Error => to_01(FromTransaction(TransRec.ParamToModel, ExpectedStim.Error'length))) ;
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 
