@@ -128,8 +128,8 @@ begin
       
       case Operation is
         when SEND | SEND_ASYNC =>
-          TxStim.Data  := FromTransaction(TransRec.DataToModel, TxStim.Data'length) ;
-          TxStim.Error := to_01(FromTransaction(TransRec.ParamToModel, TxStim.Error'length)) ;
+          TxStim.Data  := SafeResize(TransRec.DataToModel, TxStim.Data'length) ;
+          TxStim.Error := to_01(SafeResize(TransRec.ParamToModel, TxStim.Error'length)) ;
 --          if TxStim.Error(TxStim.Error'right) = '-' then 
 --            TxStim.Error := (TxStim.Error'range => '0') ;
 --          end if ; 

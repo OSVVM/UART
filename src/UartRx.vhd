@@ -161,13 +161,13 @@ begin
             end if ; 
             -- Put Data and Parameters into record
             (RxStim.Data, RxStim.Error) := ReceiveFifo.pop ;
-            TransRec.DataFromModel   <= ToTransaction(RxStim.Data,  TransRec.DataFromModel'length) ; 
-            TransRec.ParamFromModel  <= ToTransaction(RxStim.Error, TransRec.ParamFromModel'length); 
+            TransRec.DataFromModel   <= SafeResize(RxStim.Data,  TransRec.DataFromModel'length) ; 
+            TransRec.ParamFromModel  <= SafeResize(RxStim.Error, TransRec.ParamFromModel'length); 
             
             if IsCheck(Operation) then
               ExpectedStim := 
-                (Data  => FromTransaction(TransRec.DataToModel, ExpectedStim.Data'length), 
-                 Error => to_01(FromTransaction(TransRec.ParamToModel, ExpectedStim.Error'length))) ;
+                (Data  => SafeResize(TransRec.DataToModel, ExpectedStim.Data'length), 
+                 Error => to_01(SafeResize(TransRec.ParamToModel, ExpectedStim.Error'length))) ;
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 
