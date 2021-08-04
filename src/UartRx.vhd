@@ -87,7 +87,7 @@ architecture model of UartRx is
   type RxStateType is (RX_IDLE, RX_HUNT, RX_DATA, RX_PARITY, RX_STOP, RX_BREAK) ;
   signal RxState : RxStateType := RX_IDLE ;
 
-  signal DataBitCount : integer ;
+  signal DataBitCount : integer := 0;
   signal LastDataBit : std_logic ;
 
   constant MODEL_INSTANCE_NAME : string := PathTail(to_lower(UartRx'PATH_NAME)) ;
@@ -98,9 +98,9 @@ architecture model of UartRx is
   signal ReceiveCount : integer := 0 ;   
   
   -- Set initial values for configurable modes
-  signal ParityMode  : integer ;
-  signal NumStopBits : integer ;
-  signal NumDataBits : integer ;
+  signal ParityMode  : integer := UARTTB_PARITY_EVEN;
+  signal NumStopBits : integer := UARTTB_STOP_BITS_1 ;
+  signal NumDataBits : integer := UARTTB_DATA_BITS_8 ;
   signal Baud        : time    := UART_BAUD_PERIOD_125K ; -- init for clock start
 
 begin

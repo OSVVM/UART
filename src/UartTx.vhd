@@ -80,9 +80,9 @@ architecture model of UartTx is
   signal TransmitRequestCount, TransmitDoneCount      : integer := 0 ;   
 
   -- Set initial values for configurable modes
-  signal ParityMode  : integer ;
-  signal NumStopBits : integer ;
-  signal NumDataBits : integer ;
+  signal ParityMode  : integer := UARTTB_PARITY_EVEN ;
+  signal NumStopBits : integer := UARTTB_STOP_BITS_1 ;
+  signal NumDataBits : integer := UARTTB_DATA_BITS_8 ;
   signal Baud        : time    := UART_BAUD_PERIOD_125K ; -- init for clock start
 
 begin
