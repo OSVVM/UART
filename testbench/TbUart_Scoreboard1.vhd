@@ -84,10 +84,8 @@ begin
     TranscriptClose ; 
 --    AlertIfDiff("./results/TbUart_Scoreboard1.txt", "../Uart/testbench/validated_results/TbUart_Scoreboard1.txt", "") ; 
     
-    print("") ;
-    ReportAlerts(ExternalErrors => (FAILURE => 0, ERROR => -(44 + 48), WARNING => 0)) ; 
-    print("") ;
-    std.env.stop ; 
+    EndOfTestSummary(ExternalErrors => (FAILURE => 0, ERROR => -(44 + 48), WARNING => 0)) ; 
+    std.env.stop(SumAlertCount(GetAlertCount + (FAILURE => 0, ERROR => -(44 + 48), WARNING => 0))) ;
     wait ; 
   end process ControlProc ; 
 

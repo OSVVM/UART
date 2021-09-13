@@ -37,23 +37,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #  
-library osvvm_TbUart
-analyze  ./testbench/TestCtrl_e.vhd
-analyze  ./testbench/TbUart.vhd
-analyze  ./testbench/TbUart_SendGet1.vhd
-analyze  ./testbench/TbUart_SendGet2.vhd
-analyze  ./testbench/TbUart_Options1.vhd
-analyze  ./testbench/TbUart_Options2.vhd
-analyze  ./testbench/TbUart_Checkers1.vhd
-analyze  ./testbench/TbUart_Checkers2.vhd
-analyze  ./testbench/TbUart_Scoreboard1.vhd
-analyze  ./testbench/TbUart_Overload1.vhd
 
-simulate TbUart_SendGet1
-simulate TbUart_SendGet2
-simulate TbUart_Options1
-simulate TbUart_Options2
-simulate TbUart_Checkers1
-simulate TbUart_Checkers2
-simulate TbUart_Scoreboard1
-simulate TbUart_Overload1
+TestSuite Uart
+library   osvvm_TbUart
+
+include ./testbench

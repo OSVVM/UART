@@ -84,11 +84,9 @@ begin
     
     TranscriptClose ; 
 --   AlertIfDiff("./results/TbUart_Options1.txt", "../Uart/testbench/validated_results/TbUart_Options1.txt", "") ; 
-    
-    print("") ;
-    ReportAlerts(ExternalErrors => (FAILURE => 0, ERROR => 0, WARNING => 0)) ; 
-    print("") ;
-    std.env.stop ; 
+
+    EndOfTestSummary ; 
+    std.env.stop(GetAlertCount) ; 
     wait ; 
   end process ControlProc ; 
 
