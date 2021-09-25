@@ -1,14 +1,18 @@
 # UART Verification Component Change Log
 
-| Revision  | Revision Date |  Release Summary | 
-------------|---------------|----------- 
-| 2021.02   | February 2021 |  Updated resizing of values to/from Stream MIT 
-| 2020.10   | October 2020  |  Updated for updates to Stream MIT 
-| 2020.07   | July 2020     |  Updated to use Stream MIT
-| 2020.01   | January 2020  |  Updated to Apache Licenses
-| 2019.05   | May 2019      |  Updated for OSVVM public release
-| 1999.01   | January 1999  |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
+| Revision  | Revision Date  |  Release Summary | 
+------------|----------------|----------- 
+| 2021.09   | September 2021 |  Updated testbenches to create YAML reports 
+| 2021.02   | February 2021  |  Updated resizing of values to/from Stream MIT 
+| 2020.10   | October 2020   |  Updated for updates to Stream MIT 
+| 2020.07   | July 2020      |  Updated to use Stream MIT
+| 2020.01   | January 2020   |  Updated to Apache Licenses
+| 2019.05   | May 2019       |  Updated for OSVVM public release
+| 1999.01   | January 1999   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
 
+
+## 2021.02  February 2021
+Updated testbenches to create YAML reports.
 
 ## 2021.02  February 2021
 Minor updates to resize values to/from the Stream Model Independent Transactions.
