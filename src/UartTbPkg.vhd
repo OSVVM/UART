@@ -276,7 +276,7 @@ package body UartTbPkg is
     constant  rec       : in    UartStimType 
   ) return string is 
   begin
-    return "Data = " & to_hstring(rec.Data) & 
+    return "Data = " & to_hxstring(rec.Data) & 
            ", Parity Error: " & to_string( rec.Error(UARTTB_PARITY_INDEX)) &
            ", Stop Error: " & to_string( rec.Error(UARTTB_STOP_INDEX)) &
            ", Break Error: " & to_string( rec.Error(UARTTB_BREAK_INDEX)) ;

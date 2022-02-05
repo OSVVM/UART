@@ -338,7 +338,7 @@ begin
         -- Log at interface at DEBUG level
         Log(ModelID, 
           "Received:" & 
-          " Data = " & to_hstring(RxData) & 
+          " Data = " & to_hxstring(RxData) & 
           ", Parity = " & to_string(RxParity) & 
           ", Stop = " & to_string(iSerialDataIn) & 
           ", Parity Error = " & to_string(ErrorMode(UARTTB_PARITY_INDEX)) & 
