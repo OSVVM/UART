@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    02/2022   2022.02    Replaced to_hstring with to_hxstring
 --    08/2021   2021.08    Initialized NumDataBits, ParityMode, and NumStopBits
 --    02/2021   2021.02    Updated for resizing Data and Param to/from TransRec
 --    10/2020   2020.10    Update for updates to stream MIT

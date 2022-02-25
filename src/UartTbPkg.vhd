@@ -19,9 +19,10 @@
 --
 --  Revision History:
 --    Date      Version    Description
---    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
---    05/2019   2019.05    Updated for OSVVM public release
+--    02/2022   2022.02    Replaced to_hstring with to_hxstring
 --    01/2020   2020.01    Updated license notice
+--    05/2019   2019.05    Updated for OSVVM public release
+--    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
 --
 --
 --  This file is part of OSVVM.

@@ -2,6 +2,7 @@
 
 | Revision  | Revision Date  |  Release Summary | 
 ------------|----------------|----------- 
+| 2022.02   | February 2022  |  Replaced to_hstring with to_hxstring in UartRx and UartTbPkg 
 | 2021.09   | September 2021 |  Updated testbenches to create YAML reports 
 | 2021.02   | February 2021  |  Updated resizing of values to/from Stream MIT 
 | 2020.10   | October 2020   |  Updated for updates to Stream MIT 
@@ -11,7 +12,10 @@
 | 1999.01   | January 1999   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
 
 
-## 2021.02  February 2021
+## 2022.02  February 2022
+Replaced to_hstring with to_hxstring in UartRx and UartTbPkg.
+
+## 2021.09  September 2021
 Updated testbenches to create YAML reports.
 
 ## 2021.02  February 2021
