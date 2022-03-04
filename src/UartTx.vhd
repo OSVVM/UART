@@ -174,13 +174,17 @@ begin
               NumDataBits   <= CheckNumDataBits(ModelID, TransRec.IntToModel, TransRec.BoolToModel) ; 
             when UartOptionType'pos(SET_BAUD) =>
               Baud          <= CheckBaud(ModelID, TransRec.TimeToModel, TransRec.BoolToModel) ;  
-            when others =>     
-              alert(ModelID, "SetOptions: " & to_string(TransRec.Options) & ". Unsupported Option was Ignored", ERROR) ;
+            when others =>              
+              Alert(ModelID, "SetOptions, Unimplemented Option: " & to_string(UartOptionType'val(TransRec.Options)), FAILURE) ;
           end case ; 
-        
+
+        when MULTIPLE_DRIVER_DETECT =>
+          Alert(ModelID, "Multiple Drivers on Transaction Record." & 
+                         "  Transaction # " & to_string(TransRec.Rdy), FAILURE) ;
+
         when others =>
-          Alert(ModelID, "Unimplemented Transaction", FAILURE) ;
-          
+          Alert(ModelID, "Unimplemented Transaction: " & to_string(Operation), FAILURE) ;
+
       end case ;
     end loop TransactionDispatcherLoop ;
   end process TransactionDispatcher ;
