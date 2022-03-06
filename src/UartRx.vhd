@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    03/2022   2022.03    Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs
 --    02/2022   2022.02    Replaced to_hstring with to_hxstring
 --    08/2021   2021.08    Initialized NumDataBits, ParityMode, and NumStopBits
 --    02/2021   2021.02    Updated for resizing Data and Param to/from TransRec

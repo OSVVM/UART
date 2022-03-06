@@ -2,6 +2,7 @@
 
 | Revision  | Revision Date  |  Release Summary | 
 ------------|----------------|----------- 
+| 2022.03   | March 2022     |  Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs. 
 | 2022.02   | February 2022  |  Replaced to_hstring with to_hxstring in UartRx and UartTbPkg 
 | 2021.09   | September 2021 |  Updated testbenches to create YAML reports 
 | 2021.02   | February 2021  |  Updated resizing of values to/from Stream MIT 
