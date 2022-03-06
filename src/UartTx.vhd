@@ -55,6 +55,7 @@ library OSVVM ;
 
 library osvvm_common ; 
   context osvvm_common.OsvvmCommonContext ;  
+  use osvvm.ScoreboardPkg_slv.all ;
 
   use work.UartTbPkg.all ;
 
@@ -77,7 +78,7 @@ architecture model of UartTx is
   constant MODEL_INSTANCE_NAME : string := PathTail(to_lower(UartTx'PATH_NAME)) ; 
   signal ModelID  : AlertLogIDType ;
   
-  shared variable TransmitFifo     : osvvm.ScoreboardPkg_slv.ScoreboardPType ; 
+  signal TransmitFifo : osvvm.ScoreboardPkg_slv.ScoreboardIDType ;  
   signal TransmitRequestCount, TransmitDoneCount      : integer := 0 ;   
 
   -- Set initial values for configurable modes
@@ -95,9 +96,9 @@ begin
   Initialize : process
     variable ID : AlertLogIDType ; 
   begin
-    ID                         := GetAlertLogID(MODEL_INSTANCE_NAME) ; 
-    ModelID                    <= ID ; 
-    TransmitFifo.SetAlertLogID(MODEL_INSTANCE_NAME & ": Transmit FIFO", ID) ;
+    ID             := NewID(MODEL_INSTANCE_NAME) ; 
+    ModelID        <= ID ; 
+    TransmitFifo   <= NewID("TransmitFifo", ID, ReportMode => DISABLED) ; 
     wait ; 
   end process Initialize ;
 
@@ -134,7 +135,7 @@ begin
 --          if TxStim.Error(TxStim.Error'right) = '-' then 
 --            TxStim.Error := (TxStim.Error'range => '0') ;
 --          end if ; 
-          TransmitFifo.Push(TxStim.Data & TxStim.Error) ;
+          Push(TransmitFifo, TxStim.Data & TxStim.Error) ;
           Log(ModelID, 
             "SEND Queueing Transaction: " & to_string(TxStim) & 
             "  Operation # " & to_string(TransmitRequestCount + 1),
@@ -207,16 +208,17 @@ begin
   begin
     -- Initialize
     SerialDataOut <= '1' ; 
+    wait for 0 ns ; 
     
     TransmitLoop : loop 
       -- Find Transaction
-      if TransmitFifo.Empty then
+      if Empty(TransmitFifo) then
         WaitForToggle(TransmitRequestCount) ;
       else 
         wait for 0 ns ; -- allow TransmitRequestCount to settle if both happen at same time.
       end if ;
       
-      (TxStim.Data, TxStim.Error) := TransmitFifo.Pop ;
+      (TxStim.Data, TxStim.Error) := Pop(TransmitFifo) ;
       
       Log(ModelID, 
         "SEND Starting: " & to_string(TxStim) & 
