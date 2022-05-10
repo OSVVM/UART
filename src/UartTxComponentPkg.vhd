@@ -52,6 +52,7 @@ package UartTxComponentPkg is
 
   component UartTx is 
     generic (
+      MODEL_ID_NAME           : string := "" ;
       DEFAULT_BAUD            : time    := UART_BAUD_PERIOD_125K ;
       DEFAULT_NUM_DATA_BITS   : integer := UARTTB_DATA_BITS_8 ; 
       DEFAULT_PARITY_MODE     : integer := UARTTB_PARITY_EVEN ; 

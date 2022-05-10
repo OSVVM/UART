@@ -70,6 +70,7 @@ library osvvm_common ;
 
 entity UartRx is
   generic (
+    MODEL_ID_NAME           : string := "" ;
     DEFAULT_BAUD            : time    := UART_BAUD_PERIOD_125K ;
     DEFAULT_NUM_DATA_BITS   : integer := UARTTB_DATA_BITS_8 ; 
     DEFAULT_PARITY_MODE     : integer := UARTTB_PARITY_EVEN ; 
@@ -79,6 +80,12 @@ entity UartRx is
     TransRec         : InOut UartRecType ;
     SerialDataIn     : In    std_logic
   ) ;
+  -- Use MODEL_ID_NAME Generic if set, otherwise,
+  -- use model instance label (preferred if set as entityname_1)
+  constant MODEL_INSTANCE_NAME : string :=
+    IfElse(MODEL_ID_NAME'length > 0, MODEL_ID_NAME, 
+      to_lower(PathTail(UartRx'PATH_NAME))) ;
+
 end UartRx ;
 architecture model of UartRx is
 
@@ -99,8 +106,7 @@ architecture model of UartRx is
   signal DataBitCount : integer := 0;
   signal LastDataBit : std_logic ;
 
-  constant MODEL_INSTANCE_NAME : string := PathTail(to_lower(UartRx'PATH_NAME)) ;
-  signal   ModelID  : AlertLogIDType ;
+  signal ModelID  : AlertLogIDType ;
 
   signal ReceiveFifo : osvvm.ScoreboardPkg_slv.ScoreboardIDType ;
 
@@ -122,7 +128,7 @@ begin
   begin
     ID            := NewID(MODEL_INSTANCE_NAME) ;
     ModelID       <= ID ; 
-    ReceiveFifo   <= NewID("ReceiveFifo", ID, ReportMode => DISABLED) ;
+    ReceiveFifo   <= NewID("ReceiveFifo", ID, ReportMode => DISABLED, Search => PRIVATE) ;
     wait ;
   end process InitializeAlerts ;
   
