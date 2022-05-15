@@ -40,13 +40,7 @@
 
 library osvvm_TbUart
 
-include  TestHarness.pro
+analyze  OsvvmTestCommonPkg.vhd
 
-RunTest  TbUart_SendGet1.vhd
-RunTest  TbUart_SendGet2.vhd
-RunTest  TbUart_Options1.vhd
-RunTest  TbUart_Options2.vhd
-RunTest  TbUart_Checkers1.vhd
-RunTest  TbUart_Checkers2.vhd
-RunTest  TbUart_Scoreboard1.vhd
-RunTest  TbUart_Overload1.vhd
+analyze  TestCtrl_e.vhd
+analyze  TbUart.vhd

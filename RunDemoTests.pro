@@ -41,8 +41,7 @@
 TestSuite Uart
 library   osvvm_TbUart
 
-analyze  ./testbench/TestCtrl_e.vhd
-analyze  ./testbench/TbUart.vhd
+include   ./testbench/TestHarness.pro
 
 RunTest  ./testbench/TbUart_SendGet1.vhd
 RunTest  ./testbench/TbUart_SendGet2.vhd

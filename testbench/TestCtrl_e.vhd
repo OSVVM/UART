@@ -53,6 +53,8 @@ library OSVVM ;
 library osvvm_uart ; 
   context osvvm_uart.UartContext ; 
 
+use work.OsvvmTestCommonPkg.all ;
+
 entity TestCtrl is
   generic (
     tperiod_Clk           : time := 10 ns 

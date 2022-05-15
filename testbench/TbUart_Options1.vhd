@@ -70,7 +70,7 @@ begin
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen("./results/TbUart_Options1.txt") ;
+    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_Options1.txt") ;
 --    SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset

@@ -66,7 +66,7 @@ begin
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen("./results/TbUart_Checkers1.txt") ;
+    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_Checkers1.txt") ;
 --    SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
