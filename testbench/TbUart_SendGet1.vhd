@@ -49,7 +49,7 @@ architecture SendGet1 of TestCtrl is
   signal TestDone    : integer_barrier := 1 ;
   
   use osvvm_uart.ScoreboardPkg_Uart.all ; 
-  shared variable UartScoreboard : osvvm_uart.ScoreboardPkg_Uart.ScoreboardPType ; 
+  signal UartScoreboard : osvvm_uart.ScoreboardPkg_Uart.ScoreboardIdType ; 
 
 begin
 
@@ -62,12 +62,17 @@ begin
     -- Initialization of test
     SetAlertLogName("TbUart_SendGet1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
-    UartScoreboard.SetAlertLogID("UART_SB1") ; 
+    UartScoreboard <= NewID("UART_SB1") ; 
+    
+    wait for 0 ns ;  
+    SetAlertLogOptions(WriteTimeLast => FALSE) ; 
+    SetAlertLogOptions(TimeJustifyAmount => 16) ; 
+    SetAlertLogJustify ; 
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
     TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_SendGet1.txt") ;
---    SetTranscriptMirror(TRUE) ; 
+    SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
     wait until nReset = '1' ;  
