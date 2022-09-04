@@ -86,7 +86,7 @@ begin
 --   AlertIfDiff("./results/TbUart_Options1.txt", "../Uart/testbench/validated_results/TbUart_Options1.txt", "") ; 
 
     EndOfTestReports ; 
-    std.env.stop(GetAlertCount) ; 
+    std.env.stop ; 
     wait ; 
   end process ControlProc ; 
 

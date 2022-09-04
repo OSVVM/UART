@@ -88,7 +88,7 @@ begin
 --    AlertIfDiff("./results/TbUart_SendGet2.txt", "../Uart/testbench/validated_results/TbUart_SendGet2.txt", "") ; 
     
     EndOfTestReports(ExternalErrors => (FAILURE => 0, ERROR => -4, WARNING => 0)) ; 
-    std.env.stop(SumAlertCount(GetAlertCount + (FAILURE => 0, ERROR => -4, WARNING => 0))) ;
+    std.env.stop ;
     wait ; 
   end process ControlProc ; 
 
