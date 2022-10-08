@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    10/2022   2022.10    Added UartRecArrayType
 --    02/2022   2022.02    Replaced to_hstring with to_hxstring
 --    01/2020   2020.01    Updated license notice
 --    05/2019   2019.05    Updated for OSVVM public release
@@ -81,7 +82,8 @@ package UartTbPkg is
     DataFromModel (UartTb_DataType'range), 
     ParamFromModel(UartTb_ErrorModeType'range) 
   ) ;
-
+  
+  type UartRecArrayType is array (integer range <>) of UartRecType ; 
 
   ------------------------------------------------------------
   -- UART Options
