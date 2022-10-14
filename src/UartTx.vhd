@@ -19,7 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
---    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE, Added MODEL_ID_NAME generic
+--    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE_NAME, Added MODEL_ID_NAME generic
 --    03/2022   2022.03    Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs
 --    08/2021   2021.08    Initialized NumDataBits, ParityMode, and NumStopBits
 --    02/2021   2021.02    Updated for resizing Data and Param to/from TransRec
@@ -107,7 +107,7 @@ begin
   begin
     ID             := NewID(MODEL_INSTANCE_NAME) ; 
     ModelID        <= ID ; 
-    TransmitFifo   <= NewID("TransmitFifo", ID, ReportMode => DISABLED, Search => PRIVATE) ; 
+    TransmitFifo   <= NewID("TransmitFifo", ID, ReportMode => DISABLED, Search => PRIVATE_NAME) ; 
     wait ; 
   end process Initialize ;
 

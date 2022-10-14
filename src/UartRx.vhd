@@ -19,7 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
---    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE, Added MODEL_ID_NAME generic
+--    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE_NAME, Added MODEL_ID_NAME generic
 --    03/2022   2022.03    Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs
 --    02/2022   2022.02    Replaced to_hstring with to_hxstring
 --    08/2021   2021.08    Initialized NumDataBits, ParityMode, and NumStopBits
@@ -129,7 +129,7 @@ begin
   begin
     ID            := NewID(MODEL_INSTANCE_NAME) ;
     ModelID       <= ID ; 
-    ReceiveFifo   <= NewID("ReceiveFifo", ID, ReportMode => DISABLED, Search => PRIVATE) ;
+    ReceiveFifo   <= NewID("ReceiveFifo", ID, ReportMode => DISABLED, Search => PRIVATE_NAME) ;
     wait ;
   end process InitializeAlerts ;
   
@@ -272,6 +272,8 @@ begin
   ------------------------------------------------------------
   UartRxStateProc : process
   begin
+    -- Aldec enum RxStateType CURRENT=RxState
+    -- Aldec enum RxStateType STATES=RX_IDLE,RX_HUNT,RX_DATA,RX_PARITY,RX_STOP,RX_BREAK
     wait until Uart16XClk = '1' ;
 
     case RxState is
