@@ -2,6 +2,7 @@
 
 | Revision  | Revision Date  |  Release Summary | 
 ------------|----------------|----------- 
+| 2022.10   | October 2022   |  Changed PRIVATE to PRIVATE_NAME
 | 2022.05   | May 2022       |  Updated FIFOs so they are Search => PRIVATE. Added MODEL_ID_NAME generic
 | 2022.03   | March 2022     |  Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs. 
 | 2022.02   | February 2022  |  Replaced to_hstring with to_hxstring in UartRx and UartTbPkg 
@@ -12,6 +13,9 @@
 | 2020.01   | January 2020   |  Updated to Apache Licenses
 | 2019.05   | May 2019       |  Updated for OSVVM public release
 | 1999.01   | January 1999   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
+
+## 2022.10 May 2022
+- Changed PRIVATE to PRIVATE_NAME
 
 ## 2022.05 May 2022
 - Updated FIFOs so they are Search => PRIVATE.  Was only problematic in generate loops.
