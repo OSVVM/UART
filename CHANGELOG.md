@@ -1,20 +1,22 @@
 # UART Verification Component Change Log
 
-| Revision  | Revision Date  |  Release Summary | 
-------------|----------------|----------- 
-| 2022.10   | October 2022   |  Changed PRIVATE to PRIVATE_NAME
-| 2022.05   | May 2022       |  Updated FIFOs so they are Search => PRIVATE. Added MODEL_ID_NAME generic
-| 2022.03   | March 2022     |  Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs. 
-| 2022.02   | February 2022  |  Replaced to_hstring with to_hxstring in UartRx and UartTbPkg 
-| 2021.09   | September 2021 |  Updated testbenches to create YAML reports 
-| 2021.02   | February 2021  |  Updated resizing of values to/from Stream MIT 
-| 2020.10   | October 2020   |  Updated for updates to Stream MIT 
-| 2020.07   | July 2020      |  Updated to use Stream MIT
-| 2020.01   | January 2020   |  Updated to Apache Licenses
-| 2019.05   | May 2019       |  Updated for OSVVM public release
-| 1999.01   | January 1999   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
+| Revision  |  Release Summary | 
+------------|----------- 
+| 2022.10   |  Added DEMO testbench for using multiple VC
+|           |  Changed PRIVATE to PRIVATE_NAME
+| 2022.05   |  Updated FIFOs so they are Search => PRIVATE. Added MODEL_ID_NAME generic
+| 2022.03   |  Updated to use singleton based FIFOs.  Updated calls for AlertLogIDs. 
+| 2022.02   |  Replaced to_hstring with to_hxstring in UartRx and UartTbPkg 
+| 2021.09   |  Updated testbenches to create YAML reports 
+| 2021.02   |  Updated resizing of values to/from Stream MIT 
+| 2020.10   |  Updated for updates to Stream MIT 
+| 2020.07   |  Updated to use Stream MIT
+| 2020.01   |  Updated to Apache Licenses
+| 2019.05   |  Updated for OSVVM public release
+| 1999.01   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
 
 ## 2022.10 May 2022
+- Added UART/testbench_multiple_uarts testbench for using multiple OSVVM VC using for Generate
 - Changed PRIVATE to PRIVATE_NAME
 
 ## 2022.05 May 2022
