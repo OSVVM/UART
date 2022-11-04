@@ -64,7 +64,7 @@ begin
   ControlProc : process
   begin
     -- Initialization of test
-    SetAlertLogName("TbUart_UartX16_2") ;
+    SetTestName("TbUart_UartX16_2") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
     RxScoreboard <= NewID("RxSb",   NUM_UARTS) ; 
     TxFifo       <= NewID("TxFifo", NUM_UARTS) ; 

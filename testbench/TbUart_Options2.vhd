@@ -63,7 +63,7 @@ begin
   ControlProc : process
   begin
     -- Initialization of test
-    SetAlertLogName("TbUart_Options2") ;
+    SetTestName("TbUart_Options2") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
     UartScoreboard.SetAlertLogID("UART_SB1") ; 
     TbID <= GetAlertLogID("TB") ; 
