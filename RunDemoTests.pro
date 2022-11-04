@@ -43,5 +43,5 @@ library   osvvm_TbUart
 
 include   ./testbench/TestHarness.pro
 
-RunTest  ./testbench/TbUart_SendGet1.vhd
+# RunTest  ./testbench/TbUart_SendGet1.vhd
 RunTest  ./testbench/TbUart_SendGet2.vhd
