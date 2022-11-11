@@ -81,8 +81,14 @@ architecture TestHarness of TbUart is
     ) ;
   end component TestCtrl ;
 
-  signal UartTxRec      : UartRecArrayType (1 to NUM_UARTS) ;
-  signal UartRxRec      : UartRecArrayType (1 to NUM_UARTS) ;
+--  signal UartTxRec      : UartRecArrayType (1 to NUM_UARTS) ;
+--  signal UartRxRec      : UartRecArrayType (1 to NUM_UARTS) ;
+  signal UartTxRec, UartRxRec : StreamRecArrayType(1 to NUM_UARTS)(
+    DataToModel   (UartTb_DataType'range), 
+    ParamToModel  (UartTb_ErrorModeType'range), 
+    DataFromModel (UartTb_DataType'range), 
+    ParamFromModel(UartTb_ErrorModeType'range) 
+  ) ;
 
   -- Uart Interface
   signal SerialData     : std_logic_vector (1 to NUM_UARTS) ;

@@ -46,7 +46,7 @@ architecture SingleProcess_1 of TestCtrl is
   
   use osvvm_uart.ScoreboardPkg_Uart.all ; 
   signal UartScoreboard : osvvm_uart.ScoreboardPkg_Uart.ScoreboardIdArrayType (1 to NUM_UARTS) ; 
-  
+
   type UartStimArrayType is array (integer range <>) of UartStimType ;
   
   signal TxStim : UartStimArrayType (1 to NUM_UARTS) ; 
@@ -62,6 +62,8 @@ begin
     -- Initialization of test
     SetTestName("TbUart_SingleProcess_1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
+--    SetLogEnable(INFO, TRUE) ;    -- Enable PASSED logs
+--    SetLogEnable(DEBUG, TRUE) ;    -- Enable PASSED logs
     UartScoreboard <= NewID("UART_SB", NUM_UARTS) ; 
 
     -- Wait for testbench initialization 
@@ -109,6 +111,7 @@ begin
     
     for i in 1 to 16 loop 
       Get(UartRxRec, i, ReceivedVal.Data, ReceivedVal.Error) ;
+      log("UartRx received: " & to_string(ReceivedVal), DEBUG) ;
       Check(UartScoreboard(i), ReceivedVal ) ; 
     end loop ; 
     TestActive <= FALSE ; 
