@@ -54,6 +54,9 @@ library osvvm ;
   context osvvm_uart.UartContext ;
 
 entity TbUart is 
+  generic (
+    NUM_UARTS : integer := 16
+  ) ; 
 end TbUart ;
 
 architecture TestHarness of TbUart is
@@ -64,22 +67,19 @@ architecture TestHarness of TbUart is
   signal nReset         : std_logic ;
 
   ------------------------------------------------------------
-  component TestCtrl 
+  component TestCtrl is
   -- Stimulus generation and synchronization
   ------------------------------------------------------------
-  generic (
-    tperiod_Clk           : time := 10 ns 
-  ) ; 
-  port (
-    UartTxRec          : InOut UartRecArrayType ;
-    UartRxRec          : InOut UartRecArrayType ;
+    generic (
+      NUM_UARTS : integer := 16
+    ) ; 
+    port (
+      UartTxRec          : InOut UartRecArrayType ;
+      UartRxRec          : InOut UartRecArrayType ;
 
-    Clk                : In    std_logic ;
-    nReset             : In    std_logic 
-  ) ;
-  end component ;
-
-  constant NUM_UARTS : integer := 16 ; 
+      nReset             : In    std_logic 
+    ) ;
+  end component TestCtrl ;
 
   signal UartTxRec      : UartRecArrayType (1 to NUM_UARTS) ;
   signal UartRxRec      : UartRecArrayType (1 to NUM_UARTS) ;
@@ -140,13 +140,12 @@ begin
   -- Stimulus generation and synchronization
   ------------------------------------------------------------
   generic map (
-    tperiod_Clk         => tperiod_Clk
+    NUM_UARTS             => NUM_UARTS
   ) 
   port map (
     UartTxRec             => UartTxRec,
     UartRxRec             => UartRxRec,
 
-    Clk                   => Clk,
     nReset                => nReset
   ) ;
 

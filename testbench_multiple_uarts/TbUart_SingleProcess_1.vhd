@@ -1,6 +1,6 @@
 --
---  File Name:         TbUart_UartX16_1.vhd
---  Design Unit Name:  TbUart_UartX16_1
+--  File Name:         SingleProcess_1.vhd
+--  Design Unit Name:  SingleProcess_1
 --  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -9,10 +9,7 @@
 --
 --
 --  Description:
---    Validate Scoreboard_Uart with  
---       All status in = status out = 2**3, 
---       all status in vs out = 2**6 with data equal, 
---       all status in vs out with data /= 
+--     Multiple UART test
 --
 --
 --  Developed by:
@@ -22,7 +19,7 @@
 --
 --  Revision History:
 --    Date / Version    Description
---    2022.10           Derrived from TbUart_UartX16_1.vhd
+--    2022.10           Derrived from SingleProcess_1.vhd
 --
 --
 --  This file is part of OSVVM.
@@ -42,7 +39,7 @@
 --  limitations under the License.
 --
 
-architecture UartX16_1 of TestCtrl is
+architecture SingleProcess_1 of TestCtrl is
 
   signal TestDone    : integer_barrier ;
   signal TestActive  : boolean := TRUE ; 
@@ -63,13 +60,13 @@ begin
   ControlProc : process
   begin
     -- Initialization of test
-    SetTestName("TbUart_UartX16_1") ;
+    SetTestName("TbUart_SingleProcess_1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
     UartScoreboard <= NewID("UART_SB", NUM_UARTS) ; 
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_UartX16_1.txt") ;
+    TranscriptOpen(OSVVM_RESULTS_DIR & "SingleProcess_1.txt") ;
     SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
@@ -82,7 +79,7 @@ begin
     AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
---    AlertIfDiff("./results/TbUart_UartX16_1.txt", "../Uart/testbench/validated_results/TbUart_UartX16_1.txt", "") ; 
+--    AlertIfDiff("./results/SingleProcess_1.txt", "../Uart/testbench/validated_results/SingleProcess_1.txt", "") ; 
 
     -- Create yaml reports for UART scoreboard
     osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => GetTestName & "_sb_Uart.yml") ;
@@ -97,80 +94,33 @@ begin
   --   Source of all test information
   --   Used to test the UART Receiver in the UUT
   ------------------------------------------------------------
-    variable UartStim : UartStimType ;
+    variable UartStim, ReceivedVal : UartStimType ;
     variable UartNum : integer ; 
   begin
     wait for 0 ns ; wait for 0 ns ;
-    for i in 0 to 2**8 - 1 loop 
-      -- Formulate stimulus value
-      UartNum := i mod NUM_UARTS + 1 ; 
---      UartNum := 1 ;
+    for i in 1 to 16 loop 
       UartStim.Data   := to_slv(i mod 256, 8) ;  -- values 0 to 255
       UartStim.Error  := to_slv(0, 3) ;          -- no errors
       
-      -- Hand off data to the send side
-      TxStim(UartNum) <= UartStim ;
-      
-      -- Hand off Data to the receive side
-      Push(UartScoreboard(UartNum), UartStim) ; 
-      RxReq(UartNum) <= RxReq(UartNum) + 1 ;
-      wait for UART_BAUD_PERIOD_125K ; 
---      wait for 11 * UART_BAUD_PERIOD_125K ; 
+      -- Send
+      Push(UartScoreboard(i), UartStim) ; 
+      SendAsync(UartTxRec, i, UartStim.Data, UartStim.Error) ; 
+    end loop ; 
+    
+    for i in 1 to 16 loop 
+      Get(UartRxRec, i, ReceivedVal.Data, ReceivedVal.Error) ;
+      Check(UartScoreboard(i), ReceivedVal ) ; 
     end loop ; 
     TestActive <= FALSE ; 
     WaitForBarrier(TestDone) ;
     wait ; 
   end process CentralTestProc ; 
 
-
-  GenerateUartHandlers : for GEN_UART in 1 to NUM_UARTS generate 
-  begin
-    ------------------------------------------------------------
-    UartTxProc : process
-    ------------------------------------------------------------
-    begin
-      wait for 0 ns ; wait for 0 ns ; 
-
-      loop 
-        exit when not TestActive ;
-        wait on TxStim(GEN_UART)'transaction, TestActive ; 
-        exit when not TestActive ;
-        SendAsync(UartTxRec(GEN_UART), TxStim(GEN_UART).Data, TxStim(GEN_UART).Error) ; 
-      end loop ;
-      
-      WaitForBarrier(TestDone) ;
-      wait ;
-    end process UartTxProc ;
-
-
-    ------------------------------------------------------------
-    UartRxProc : process
-    ------------------------------------------------------------
-      variable ReceivedVal : UartStimType ; 
-    begin
-      wait for 0 ns ; wait for 0 ns ; 
-      UartReceiveLoop : loop 
-        exit when not TestActive ;
-        if Empty(UartScoreboard(GEN_UART)) then
-          wait on RxReq(GEN_UART), TestActive ; 
-          exit when not TestActive ;
-        end if ; 
-        
-        Get(UartRxRec(GEN_UART), ReceivedVal.Data, ReceivedVal.Error) ;
-        Check(UartScoreboard(GEN_UART), ReceivedVal ) ; 
-      end loop ;
-      
-      WaitForBarrier(TestDone) ;
-      wait ;
-    end process UartRxProc ;
-  end generate GenerateUartHandlers ; 
-
-
-end UartX16_1 ;
-Configuration TbUart_UartX16_1 of TbUart is
+end SingleProcess_1 ;
+Configuration TbUart_SingleProcess_1 of TbUart is
   for TestHarness
     for TestCtrl_1 : TestCtrl
-      use entity work.TestCtrl(UartX16_1) ; 
+      use entity work.TestCtrl(SingleProcess_1) ; 
     end for ; 
   end for ; 
-end TbUart_UartX16_1 ; 
+end TbUart_SingleProcess_1 ; 

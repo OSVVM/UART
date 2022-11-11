@@ -44,4 +44,7 @@ analyze  OsvvmTestCommonPkg.vhd
 analyze  TestCtrl_e.vhd
 analyze  TbUart.vhd
 
-RunTest  TbUart_UartX16_1.vhd
+# RunTest  TbUart_UartX16_1.vhd
+# RunTest  TbUart_UartX16_2.vhd
+RunTest  TbUart_SingleProcess_1.vhd 
+# RunTest  TbUart_MultipleProcess_1.vhd 

@@ -1,6 +1,6 @@
 --
---  File Name:         TbUart_UartX16_2.vhd
---  Design Unit Name:  TbUart_UartX16_2
+--  File Name:         TbUart_MultipleProcess_1.vhd.vhd
+--  Design Unit Name:  TbUart_MultipleProcess_1.vhd
 --  OSVVM Release:     OSVVM MODELS STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -9,10 +9,7 @@
 --
 --
 --  Description:
---    Validate Scoreboard_Uart with  
---       All status in = status out = 2**3, 
---       all status in vs out = 2**6 with data equal, 
---       all status in vs out with data /= 
+--    Test Multiple UARTs, each being dispatched from a separate process
 --
 --
 --  Developed by:
@@ -42,7 +39,7 @@
 --  limitations under the License.
 --
 
-architecture UartX16_1 of TestCtrl is
+architecture MultipleProcess_1 of TestCtrl is
 
   signal TestDone    : integer_barrier ;
   signal TestActive  : boolean := TRUE ; 
@@ -53,6 +50,9 @@ architecture UartX16_1 of TestCtrl is
   
   signal TxReq  : integer_vector (1 to NUM_UARTS) := (others => 0) ; 
   signal RxReq  : integer_vector (1 to NUM_UARTS) := (others => 0) ; 
+  
+  signal TxIdleProbability : real := 0.05 ; -- 5 %
+  signal RxIdleProbability : real := 0.05 ; -- 5 %
 begin
 
   ------------------------------------------------------------
@@ -62,27 +62,31 @@ begin
   ControlProc : process
   begin
     -- Initialization of test
-    SetTestName("TbUart_UartX16_2") ;
+    SetTestName("TbUart_MultipleProcess_1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
     RxScoreboard <= NewID("RxSb",   NUM_UARTS) ; 
     TxFifo       <= NewID("TxFifo", NUM_UARTS) ; 
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_UartX16_2.txt") ;
+    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_MultipleProcess_1.txt") ;
     SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
     wait until nReset = '1' ;  
     ClearAlerts ;
     
+    -- Do 5 ms of UART transfers and then stop
+    wait for 5 ms ; 
+    TestActive <= FALSE ; 
+
     -- Wait for test to finish
-    WaitForBarrier(TestDone, 100 ms) ;
-    AlertIf(now >= 100 ms, "Test finished due to timeout") ;
+    WaitForBarrier(TestDone, 5 ms) ;
+    AlertIf(now >= 10 ms, "Test finished due to timeout") ;
     AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
---    AlertIfDiff("./results/TbUart_UartX16_2.txt", "../Uart/testbench/validated_results/TbUart_UartX16_2.txt", "") ; 
+--    AlertIfDiff("./results/TbUart_MultipleProcess_1.txt", "../Uart/testbench/validated_results/TbUart_MultipleProcess_1.txt", "") ; 
     
     -- Create yaml reports for UART scoreboard
     osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => GetTestName & "_sb_Uart.yml") ;
@@ -90,57 +94,37 @@ begin
     std.env.stop ;
     wait ; 
   end process ControlProc ; 
-  
-  
-  ------------------------------------------------------------
-  CentralTestProc : process
-  --   Source of all test information
-  --   Used to test the UART Receiver in the UUT
-  ------------------------------------------------------------
-    variable UartStim : UartStimType ;
-    variable UartNum : integer ; 
-  begin
-    wait for 0 ns ; wait for 0 ns ;
-    for i in 0 to 2**8 - 1 loop 
-      -- Formulate stimulus value
-      UartNum := i mod NUM_UARTS + 1 ; 
-      UartStim.Data   := to_slv((i + 1) mod 256, 8) ;  -- values 0 to 255
-      UartStim.Error  := to_slv(0, 3) ;          -- no errors
-      
-      -- Hand off data to the send side
-      Push(TxFifo(UartNum), UartStim) ; 
-      TxReq(UartNum) <= increment(TxReq(UartNum)) ;
-      -- increment(TxReq(UartNum)) ;  -- Not static signal
-      
-      -- Hand off Data to the receive side
-      Push(RxScoreboard(UartNum), UartStim) ; 
-      RxReq(UartNum) <= increment(RxReq(UartNum)) ;
-      wait for UART_BAUD_PERIOD_125K ; 
---      wait for 11 * UART_BAUD_PERIOD_125K ; 
-    end loop ; 
-    TestActive <= FALSE ; 
-    WaitForBarrier(TestDone) ;
-    wait ; 
-  end process CentralTestProc ; 
-
 
   GenerateUartHandlers : for GEN_UART in 1 to NUM_UARTS generate 
+    signal RxActive : boolean := TRUE ; 
   begin
     ------------------------------------------------------------
     UartTxProc : process
     ------------------------------------------------------------
       variable TxStim : UartStimType ;
+      variable RvCtrl, RvData : RandomPType ; 
     begin
+      RvCtrl.InitSeed(RvCtrl'INSTANCE_NAME) ;
+      RvData.InitSeed(RvData'INSTANCE_NAME) ;
       wait for 0 ns ; wait for 0 ns ; 
 
-      TransmitLoop : loop 
-        exit when not TestActive ;
-        if Empty(TxFifo(GEN_UART)) then
-          wait on TxReq(GEN_UART), TestActive ; 
-          exit when not TestActive and Empty(TxFifo(GEN_UART)) ;
-        end if ; 
-        TxStim := Pop(TxFifo(GEN_UART)) ; 
-        SendAsync(UartTxRec(GEN_UART), TxStim.Data, TxStim.Error) ; 
+      TransmitLoop : while RxActive loop 
+        for i in 1 to RvCtrl.RandInt(1, 20) loop 
+          TxStim.Error  := RvData.DistSlv((70,10,10,6,1,1,1,1), 3) ; 
+          if TxStim.Error >= 4 then 
+            TxStim.Data   := RvData.RandSlv(11,25,8);  -- Break Error
+          elsif TxStim.Error <= 1 then 
+            TxStim.Data   := RvData.RandSlv(0,255,8);  -- Normal & Parity Errors
+          else
+            TxStim.Data   := RvData.RandSlv(1,255,8);  -- Stop Error or Stop and Parity
+          end if ;
+          Push(RxScoreboard(GEN_UART), TxStim) ; 
+          Send(UartTxRec(GEN_UART), TxStim.Data, TxStim.Error) ; 
+		  exit when not RxActive ; 
+        end loop ; 
+        
+        WaitForClock(UartTxRec(GEN_UART), RvCtrl.RandInt(1, 5));
+
       end loop TransmitLoop ;
       
       WaitForBarrier(TestDone) ;
@@ -152,30 +136,32 @@ begin
     UartRxProc : process
     ------------------------------------------------------------
       variable ReceivedVal : UartStimType ; 
+      variable RvCtrl : RandomPType ; 
     begin
+      RvCtrl.InitSeed(RvCtrl'INSTANCE_NAME) ;
       wait for 0 ns ; wait for 0 ns ; 
-      ReceiveLoop : loop 
-        exit when not TestActive ;
-        if Empty(RxScoreboard(GEN_UART)) then
-          wait on RxReq(GEN_UART), TestActive ; 
-          exit when not TestActive and Empty(TxFifo(GEN_UART)) ;
-        end if ; 
+      ReceiveLoop : while TestActive or not Empty(RxScoreboard(GEN_UART)) loop 
+        for i in 1 to RvCtrl.RandInt(1, 20) loop         
+          Get(UartRxRec(GEN_UART), ReceivedVal.Data, ReceivedVal.Error) ;
+          Check(RxScoreboard(GEN_UART), ReceivedVal ) ; 
+          exit when not TestActive ; 
+        end loop ;
+        RxActive <= TestActive ; 
         
-        Get(UartRxRec(GEN_UART), ReceivedVal.Data, ReceivedVal.Error) ;
-        Check(RxScoreboard(GEN_UART), ReceivedVal ) ; 
+        WaitForClock(UartRxRec(GEN_UART), RvCtrl.RandInt(1, 5));
       end loop ;
       
       WaitForBarrier(TestDone) ;
       wait ;
     end process UartRxProc ;
   end generate GenerateUartHandlers ; 
+  
+end MultipleProcess_1 ;
 
-
-end UartX16_1 ;
-Configuration TbUart_UartX16_2 of TbUart is
+Configuration TbUart_MultipleProcess_1 of TbUart is
   for TestHarness
     for TestCtrl_1 : TestCtrl
-      use entity work.TestCtrl(UartX16_1) ; 
+      use entity work.TestCtrl(MultipleProcess_1) ; 
     end for ; 
   end for ; 
-end TbUart_UartX16_2 ; 
+end TbUart_MultipleProcess_1 ; 
