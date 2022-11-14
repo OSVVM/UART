@@ -42,15 +42,6 @@
 architecture SingleProcess_1 of TestCtrl is
 
   signal TestDone    : integer_barrier ;
-  signal TestActive  : boolean := TRUE ; 
-  
-  use osvvm_uart.ScoreboardPkg_Uart.all ; 
-  signal UartScoreboard : osvvm_uart.ScoreboardPkg_Uart.ScoreboardIdArrayType (1 to NUM_UARTS) ; 
-
-  type UartStimArrayType is array (integer range <>) of UartStimType ;
-  
-  signal TxStim : UartStimArrayType (1 to NUM_UARTS) ; 
-  signal RxReq  : integer_vector (1 to NUM_UARTS) := (others => 0); 
 begin
 
   ------------------------------------------------------------
@@ -62,9 +53,8 @@ begin
     -- Initialization of test
     SetTestName("TbUart_SingleProcess_1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
---    SetLogEnable(INFO, TRUE) ;    -- Enable PASSED logs
---    SetLogEnable(DEBUG, TRUE) ;    -- Enable PASSED logs
-    UartScoreboard <= NewID("UART_SB", NUM_UARTS) ; 
+    SetLogEnable(INFO, TRUE) ;    -- Enable PASSED logs
+    SetLogEnable(DEBUG, TRUE) ;    -- Enable PASSED logs
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
@@ -96,25 +86,41 @@ begin
   --   Source of all test information
   --   Used to test the UART Receiver in the UUT
   ------------------------------------------------------------
-    variable UartStim, ReceivedVal : UartStimType ;
-    variable UartNum : integer ; 
   begin
-    wait for 0 ns ; wait for 0 ns ;
-    for i in 1 to 16 loop 
-      UartStim.Data   := to_slv(i mod 256, 8) ;  -- values 0 to 255
-      UartStim.Error  := to_slv(0, 3) ;          -- no errors
-      
-      -- Send
-      Push(UartScoreboard(i), UartStim) ; 
-      SendAsync(UartTxRec, i, UartStim.Data, UartStim.Error) ; 
-    end loop ; 
+    SendAsync(UartTxRec( 1), Data => X"01", Param => "000") ; 
+    SendAsync(UartTxRec( 2), Data => X"02", Param => "000") ; 
+    SendAsync(UartTxRec( 3), Data => X"03", Param => "000") ; 
+    SendAsync(UartTxRec( 4), Data => X"04", Param => "000") ; 
+    SendAsync(UartTxRec( 5), Data => X"05", Param => "000") ; 
+    SendAsync(UartTxRec( 6), Data => X"06", Param => "000") ; 
+    SendAsync(UartTxRec( 7), Data => X"07", Param => "000") ; 
+    SendAsync(UartTxRec( 8), Data => X"08", Param => "000") ; 
+    SendAsync(UartTxRec( 9), Data => X"09", Param => "000") ; 
+    SendAsync(UartTxRec(10), Data => X"0A", Param => "000") ; 
+    SendAsync(UartTxRec(11), Data => X"0B", Param => "000") ; 
+    SendAsync(UartTxRec(12), Data => X"0C", Param => "000") ; 
+    SendAsync(UartTxRec(13), Data => X"0D", Param => "000") ; 
+    SendAsync(UartTxRec(14), Data => X"0E", Param => "000") ; 
+    SendAsync(UartTxRec(15), Data => X"0F", Param => "000") ; 
+    SendAsync(UartTxRec(16), Data => X"10", Param => "000") ; 
     
-    for i in 1 to 16 loop 
-      Get(UartRxRec, i, ReceivedVal.Data, ReceivedVal.Error) ;
-      log("UartRx received: " & to_string(ReceivedVal), DEBUG) ;
-      Check(UartScoreboard(i), ReceivedVal ) ; 
-    end loop ; 
-    TestActive <= FALSE ; 
+    Check(UartRxRec( 1), Data => X"01", Param => "000") ; 
+    Check(UartRxRec( 2), Data => X"02", Param => "000") ; 
+    Check(UartRxRec( 3), Data => X"03", Param => "000") ; 
+    Check(UartRxRec( 4), Data => X"04", Param => "000") ; 
+    Check(UartRxRec( 5), Data => X"05", Param => "000") ; 
+    Check(UartRxRec( 6), Data => X"06", Param => "000") ; 
+    Check(UartRxRec( 7), Data => X"07", Param => "000") ; 
+    Check(UartRxRec( 8), Data => X"08", Param => "000") ; 
+    Check(UartRxRec( 9), Data => X"09", Param => "000") ; 
+    Check(UartRxRec(10), Data => X"0A", Param => "000") ; 
+    Check(UartRxRec(11), Data => X"0B", Param => "000") ; 
+    Check(UartRxRec(12), Data => X"0C", Param => "000") ; 
+    Check(UartRxRec(13), Data => X"0D", Param => "000") ; 
+    Check(UartRxRec(14), Data => X"0E", Param => "000") ; 
+    Check(UartRxRec(15), Data => X"0F", Param => "000") ; 
+    Check(UartRxRec(16), Data => X"10", Param => "000") ; 
+    
     WaitForBarrier(TestDone) ;
     wait ; 
   end process CentralTestProc ; 

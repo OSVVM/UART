@@ -120,7 +120,7 @@ begin
           end if ;
           Push(RxScoreboard(GEN_UART), TxStim) ; 
           Send(UartTxRec(GEN_UART), TxStim.Data, TxStim.Error) ; 
-		  exit when not RxActive ; 
+          exit when not RxActive ; 
         end loop ; 
         
         WaitForClock(UartTxRec(GEN_UART), RvCtrl.RandInt(1, 5));
