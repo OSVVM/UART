@@ -2,6 +2,7 @@
 
 | Revision  |  Release Summary | 
 ------------|----------- 
+| 2022.11   |  Updated DEMO testbench for using multiple VC
 | 2022.10   |  Added DEMO testbench for using multiple VC
 |           |  Changed PRIVATE to PRIVATE_NAME
 | 2022.05   |  Updated FIFOs so they are Search => PRIVATE. Added MODEL_ID_NAME generic
@@ -15,7 +16,13 @@
 | 2019.05   |  Updated for OSVVM public release
 | 1999.01   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
 
-## 2022.10 May 2022
+## 2022.11 November 2022
+- Updated UART/testbench_multiple_uarts testbench for using multiple OSVVM VC using for Generate
+- Added usage of new StreamRecArrayType and StreamTransactionArrayPkg
+- Added new examples:  SingleProcess1, SingleProcessLoop_1, SingleProcessLoop_2, and MultipleProcess_1    
+- Added GHDL_Debug directory to support GHDL 
+
+## 2022.10 October 2022
 - Added UART/testbench_multiple_uarts testbench for using multiple OSVVM VC using for Generate
 - Changed PRIVATE to PRIVATE_NAME
 
