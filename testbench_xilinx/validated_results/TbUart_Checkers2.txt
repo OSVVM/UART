@@ -1,0 +1,31 @@
+%% Alert ERROR   in uartrx_1, Received: Data = 50, Parity Error: 0, Stop Error: 0, Break Error: 0.  Expected: Data = 40, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 1 at 103750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 51, Parity Error: 1, Stop Error: 0, Break Error: 0.  Expected: Data = 41, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 2 at 191750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 52, Parity Error: 0, Stop Error: 1, Break Error: 0.  Expected: Data = 42, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 3 at 279750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 53, Parity Error: 1, Stop Error: 1, Break Error: 0.  Expected: Data = 43, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 4 at 375750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1.  Expected: Data = 40, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 5 at 471750 ns
+%% Log   PASSED  in Default, Expecting 5 Errors at 471750 ns
+%% Log   PASSED  in TB UartRxProc, Transaction Count Received : 5 at 471750 ns
+%% DONE  FAILED  uartrx_1  Total Error(s) = 5  Failures: 0  Errors: 5  Warnings: 0  Passed: 2  Affirmations Checked: 7  at 471750 ns
+%% Log   PASSED  in TB UartRxProc, Expecting 5 Errors, Received : 5 at 471750 ns
+%% Log   PASSED  in UartTxProc, Transaction Count Received : 5 at 532000 ns
+%% DONE  PASSED  uarttx_1  Passed: 4  Affirmations Checked: 9  at 532000 ns
+%% Log   PASSED  in UartTxProc, Error Count Received : 0 at 532000 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 60, Parity Error: 0, Stop Error: 0, Break Error: 0.  Expected: Data = 40, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 6 at 615750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 61, Parity Error: 1, Stop Error: 0, Break Error: 0.  Expected: Data = 41, Parity Error: 1, Stop Error: 0, Break Error: 0.  Operation # 7 at 703750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 62, Parity Error: 0, Stop Error: 1, Break Error: 0.  Expected: Data = 42, Parity Error: 0, Stop Error: 1, Break Error: 0.  Operation # 8 at 791750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 63, Parity Error: 1, Stop Error: 1, Break Error: 0.  Expected: Data = 43, Parity Error: 1, Stop Error: 1, Break Error: 0.  Operation # 9 at 887750 ns
+%% Log   PASSED  in uartrx_1, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1.  Operation # 10 at 983750 ns
+%% Log   PASSED  in TB UartRxProc, Transaction Count Received : 10 at 983750 ns
+%% DONE  FAILED  uartrx_1  Total Error(s) = 9  Failures: 0  Errors: 9  Warnings: 0  Passed: 7  Affirmations Checked: 16  at 983750 ns
+%% Log   PASSED  in TB UartRxProc, Expecting 9 Errors, Received : 9 at 983750 ns
+%% Log   PASSED  in uartrx_1, Received: Data = 70, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 11 at 1135750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 71, Parity Error: 1, Stop Error: 0, Break Error: 0.  Expected: Data = 71, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 12 at 1223750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 72, Parity Error: 0, Stop Error: 1, Break Error: 0.  Expected: Data = 72, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 13 at 1311750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 73, Parity Error: 1, Stop Error: 1, Break Error: 0.  Expected: Data = 73, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 14 at 1407750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 00, Parity Error: 0, Stop Error: 1, Break Error: 1.  Expected: Data = 74, Parity Error: 0, Stop Error: 0, Break Error: 0.  Operation # 15 at 1503750 ns
+%% DONE  FAILED  uartrx_1  Total Error(s) = 13  Failures: 0  Errors: 13  Warnings: 0  Passed: 9  Affirmations Checked: 22  at 1503750 ns
+%% Log   PASSED  in TB UartRxProc, Expecting 13 Errors, Received : 13 at 1503750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 80, Parity Error: 1, Stop Error: 1, Break Error: 0.  Expected: Data = 80, Parity Error: 1, Stop Error: 0, Break Error: 0.  Operation # 16 at 1663750 ns
+%% Alert ERROR   in uartrx_1, Received: Data = 81, Parity Error: 1, Stop Error: 1, Break Error: 0.  Expected: Data = 81, Parity Error: 0, Stop Error: 1, Break Error: 0.  Operation # 17 at 1759750 ns
+%% DONE  FAILED  uartrx_1  Total Error(s) = 15  Failures: 0  Errors: 15  Warnings: 0  Passed: 10  Affirmations Checked: 25  at 1759750 ns
+%% Log   PASSED  in TB UartRxProc, Expecting 15 Errors, Received : 15 at 1759750 ns
