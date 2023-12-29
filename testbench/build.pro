@@ -40,7 +40,11 @@
 
 library TbUart
 
-include  TestHarness.pro
+analyze  OsvvmTestCommonPkg.vhd
+
+analyze  TestCtrl_e.vhd
+analyze  TbUart.vhd
+
 
 RunTest  TbUart_SendGet1.vhd
 RunTest  TbUart_SendGet2.vhd
