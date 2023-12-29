@@ -41,7 +41,8 @@
 TestSuite Uart
 library   osvvm_TbUart
 
-include   ./testbench/TestHarness.pro
-
-# RunTest  ./testbench/TbUart_SendGet1.vhd
-RunTest  ./testbench/TbUart_SendGet2.vhd
+if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
+  include ./testbench/build_one.pro
+} else {
+  include ./testbench_xilinx/build_one.pro
+}

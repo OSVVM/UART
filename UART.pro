@@ -38,10 +38,20 @@
 #  limitations under the License.
 #
 library osvvm_uart
-analyze ./src/UartTbPkg.vhd
+if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
+  analyze ./src/UartTbPkg.vhd
+} else {
+  analyze ./src/UartTbPkg_xilinx.vhd
+}
+
 analyze ./src/ScoreboardPkg_Uart.vhd
 analyze ./src/UartTxComponentPkg.vhd
 analyze ./src/UartRxComponentPkg.vhd
 analyze ./src/UartContext.vhd
-analyze ./src/UartTx.vhd
-analyze ./src/UartRx.vhd
+if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
+  analyze ./src/UartTx.vhd
+  analyze ./src/UartRx.vhd
+} else {
+  analyze ./src/UartTx_xilinx.vhd
+  analyze ./src/UartRx_xilinx.vhd
+}  
