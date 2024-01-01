@@ -37,12 +37,34 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #  
+library tbuart
 
-TestSuite Uart
-library   osvvm_TbUart
+analyze  OsvvmTestCommonPkg.vhd
 
-if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
-  include ./testbench/build_one.pro
-} else {
-  include ./testbench_xilinx/build_one.pro
-}
+analyze  TestCtrl_e.vhd
+analyze  TbUart.vhd
+
+analyze   TbUart_SendGet1.vhd
+TestName  TbUart_SendGet1
+simulate  TbUart
+analyze   TbUart_SendGet2.vhd
+TestName  TbUart_SendGet2
+simulate  TbUart
+analyze   TbUart_Options1.vhd
+TestName  TbUart_Options1
+simulate  TbUart
+analyze   TbUart_Options2.vhd
+TestName  TbUart_Options2
+simulate  TbUart
+analyze   TbUart_Checkers1.vhd
+TestName  TbUart_Checkers1
+simulate  TbUart
+analyze   TbUart_Checkers2.vhd
+TestName  TbUart_Checkers2
+simulate  TbUart
+analyze   TbUart_Scoreboard1.vhd
+TestName  TbUart_Scoreboard1
+simulate  TbUart
+analyze   TbUart_Overload1.vhd
+TestName  TbUart_Overload1
+simulate  TbUart

@@ -38,17 +38,17 @@
 #  limitations under the License.
 #  
 
-library TbUart
+# library osvvm_uart
+# analyze ../src/UartTx_xilinx.vhd 
+# analyze ../src/UartRx_xilinx.vhd 
 
-include  TestHarness.pro
+library tbuart
 
-RunTest  TbUart_SendGet1.vhd
-RunTest  TbUart_SendGet2.vhd
-RunTest  TbUart_Options1.vhd
-RunTest  TbUart_Options2.vhd
-RunTest  TbUart_Checkers1.vhd
-RunTest  TbUart_Checkers2.vhd
-RunTest  TbUart_Scoreboard1.vhd
-RunTest  TbUart_Overload1.vhd
-# RunTest  TbUart_UartX1_1.vhd
-# RunTest  TbUart_UartX1_2.vhd
+analyze  OsvvmTestCommonPkg.vhd
+
+analyze  TestCtrl_e.vhd
+analyze  TbUart.vhd
+
+analyze   TbUart_SendGet1.vhd
+TestName  TbUart_SendGet1
+simulate  TbUart
