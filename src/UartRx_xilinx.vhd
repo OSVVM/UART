@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    03/2024   2024.03    Updated SafeResize to use ModelID
 --    10/2022   2022.10    Changed enum value PRIVATE to PRIVATE_NAME due to VHDL-2019 keyword conflict.   
 --    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE
 --                         Added MODEL_ID_NAME generic
@@ -194,13 +195,13 @@ begin
 -- works            RxStim.Error := ConcatStim(RxStim.Error'length downto 1) ; 
             (Data, Error) := pop(ReceiveFifo) ; -- Uses Aliases
 
-            TransRec.DataFromModel   <= SafeResize(RxStim.Data,  TransRec.DataFromModel'length) ; 
-            TransRec.ParamFromModel  <= SafeResize(RxStim.Error, TransRec.ParamFromModel'length); 
+            TransRec.DataFromModel   <= SafeResize(ModelID, RxStim.Data,  TransRec.DataFromModel'length) ; 
+            TransRec.ParamFromModel  <= SafeResize(ModelID, RxStim.Error, TransRec.ParamFromModel'length); 
             
             if IsCheck(Operation) then
               ExpectedStim := 
-                (Data  => SafeResize(TransRec.DataToModel, ExpectedStim.Data'length), 
-                 Error => to_01(SafeResize(TransRec.ParamToModel, ExpectedStim.Error'length))) ;
+                (Data  => SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length), 
+                 Error => to_01(SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length))) ;
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 
