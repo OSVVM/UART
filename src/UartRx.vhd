@@ -351,10 +351,10 @@ begin
         ErrorMode(UARTTB_PARITY_INDEX) := CalcParity(RxData, ParityMode) ?/= RxParity ;
         ErrorMode(UARTTB_STOP_INDEX)   := not to_01(iSerialDataIn) ;
         if ParityMode /= UARTTB_PARITY_NONE then
-			    ErrorMode(UARTTB_BREAK_INDEX)  := not (iSerialDataIn or RxParity or (or RxData)) ;
-		    else
-			    ErrorMode(UARTTB_BREAK_INDEX)  := not (iSerialDataIn or (or RxData)) ;
-		    end if;
+          ErrorMode(UARTTB_BREAK_INDEX)  := not (iSerialDataIn or RxParity or (or RxData)) ;
+        else
+          ErrorMode(UARTTB_BREAK_INDEX)  := not (iSerialDataIn or (or RxData)) ;
+        end if;
         if ErrorMode(UARTTB_BREAK_INDEX) = '1' then 
           Log(ModelID, "UartRx  Break Detected", INFO) ;
         end if ; 
