@@ -52,7 +52,7 @@ architecture Scoreboard1 of TestCtrl is
   signal TestDone    : integer_barrier := 1 ;
   
   use osvvm_uart.ScoreboardPkg_Uart.all ; 
-  shared variable UartScoreboard : osvvm_uart.ScoreboardPkg_Uart.ScoreboardPType ; 
+  signal UartScoreboard : osvvm_uart.ScoreboardPkg_Uart.ScoreboardIdType ; 
 
 begin
 
@@ -65,7 +65,7 @@ begin
     -- Initialization of test
     SetTestName("TbUart_Scoreboard1") ;
     SetLogEnable(PASSED, TRUE) ;    -- Enable PASSED logs
-    UartScoreboard.SetAlertLogID("UART_SB1") ; 
+    UartScoreboard <= NewID("UART_SB1") ; 
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
@@ -84,6 +84,7 @@ begin
     TranscriptClose ; 
 --    AlertIfDiff("./results/TbUart_Scoreboard1.txt", "../Uart/testbench/validated_results/TbUart_Scoreboard1.txt", "") ; 
     
+    osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
     EndOfTestReports(ExternalErrors => (FAILURE => 0, ERROR => -(44 + 48), WARNING => 0)) ; 
     std.env.stop ;
     wait ; 
@@ -112,7 +113,7 @@ log(TxLogID, "Sequence 1 -- Basic Transfer with Passing data and status", INFO) 
       ExpStim.Data  := TxStim.Data ;
       TxStim.Error  := to_slv(i, 3) ;
       ExpStim.Error := TxStim.Error ;
-      UartScoreboard.Push( ExpStim ) ; 
+      Push(UartScoreboard, ExpStim ) ; 
       Send(UartTxRec, TxStim.Data, TxStim.Error) ;
     end loop ; 
     
@@ -125,7 +126,7 @@ log(TxLogID, "Sequence 2 -- All Status Values, 64 - 20 mismatches", INFO) ;
       ExpStim.Data  := TxStim.Data ;
       TxStim.Error  := TxStim.Data(5 downto 3) ;
       ExpStim.Error := TxStim.Data(2 downto 0) ;
-      UartScoreboard.Push( ExpStim ) ; 
+      Push(UartScoreboard, ExpStim ) ; 
       Send(UartTxRec, TxStim.Data, TxStim.Error) ;
     end loop ; 
     
@@ -138,14 +139,14 @@ log(TxLogID, "Sequence 3 -- Data mismatch with All Status Values, 64 - 16 mismat
       ExpStim.Data  := to_slv(i + 1, 8) ;
       TxStim.Error  := TxStim.Data(5 downto 3) ;
       ExpStim.Error := TxStim.Data(2 downto 0) ;
-      UartScoreboard.Push( ExpStim ) ; 
+      Push(UartScoreboard, ExpStim ) ; 
       Send(UartTxRec, TxStim.Data, TxStim.Error) ;
     end loop ; 
     
     
 log(TxLogID, "Sentinal Transfer to mark end of test", INFO) ;
     TestActive <= FALSE after 8 us ;  -- last one 
-    UartScoreboard.Push( UartStimType'(X"50", UARTTB_NO_ERROR) ) ; 
+    Push(UartScoreboard, UartStimType'(X"50", UARTTB_NO_ERROR) ) ; 
     Send(UartTxRec, X"50") ;
     
     AffirmIfEqual(GetAlertCount, 44 + 48, "Alert Count") ;
@@ -169,7 +170,7 @@ log(TxLogID, "Sentinal Transfer to mark end of test", INFO) ;
 
     UartReceiveLoop : while TestActive loop 
       Get(UartRxRec, ReceivedVal.Data, ReceivedVal.Error) ;
-      UartScoreboard.Check( ReceivedVal ) ; 
+      Check(UartScoreboard, ReceivedVal ) ; 
     end loop ;
     --
     ------------------------------------------------------------

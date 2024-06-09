@@ -74,7 +74,7 @@ begin
 --    AlertIfDiff("./results/GhdlDebug_2.txt", "../Uart/testbench/validated_results/GhdlDebug_2.txt", "") ; 
 
     -- Create yaml reports for UART scoreboard
-    osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => GetTestName & "_sb_Uart.yml") ;
+    osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
     EndOfTestReports ; 
     std.env.stop ;
     wait ; 
