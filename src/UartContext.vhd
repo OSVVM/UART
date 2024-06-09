@@ -46,6 +46,6 @@ context UartContext is
     use osvvm_uart.UartTbPkg.all ; 
     use osvvm_uart.UartTxComponentPkg.all ; 
     use osvvm_uart.UartRxComponentPkg.all ; 
-    use osvvm_uart.ScoreboardPkg_Uart.all ;
+    -- use osvvm_uart.ScoreboardPkg_Uart.all ;
 end context UartContext ; 
 
