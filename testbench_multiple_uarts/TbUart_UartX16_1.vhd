@@ -85,7 +85,7 @@ begin
 --    AlertIfDiff("./results/TbUart_UartX16_1.txt", "../Uart/testbench/validated_results/TbUart_UartX16_1.txt", "") ; 
 
     -- Create yaml reports for UART scoreboard
-    osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => GetTestName & "_sb_Uart.yml") ;
+    osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
     EndOfTestReports ; 
     std.env.stop ;
     wait ; 

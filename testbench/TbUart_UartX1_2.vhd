@@ -86,6 +86,7 @@ begin
     TranscriptClose ; 
 --    AlertIfDiff("./results/TbUart_UartX1_2.txt", "../Uart/testbench/validated_results/TbUart_UartX1_2.txt", "") ; 
     
+    osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
     EndOfTestReports ; 
     std.env.stop ;
     wait ; 
