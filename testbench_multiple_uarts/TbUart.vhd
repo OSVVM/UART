@@ -74,8 +74,8 @@ architecture TestHarness of TbUart is
       NUM_UARTS : integer := 16
     ) ; 
     port (
-      UartTxRec          : InOut UartRecArrayType ;
-      UartRxRec          : InOut UartRecArrayType ;
+      UartTxRec          : InOut StreamRecArrayType ;
+      UartRxRec          : InOut StreamRecArrayType ;
 
       nReset             : In    std_logic 
     ) ;

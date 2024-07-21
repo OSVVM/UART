@@ -61,8 +61,8 @@ entity TestCtrl is
   ) ; 
   port (
     -- Record Interface
-    UartTxRec          : InOut UartRecArrayType ;
-    UartRxRec          : InOut UartRecArrayType ;
+    UartTxRec          : InOut StreamRecArrayType ;
+    UartRxRec          : InOut StreamRecArrayType ;
 
     -- Global Signal Interface
     nReset              : In    std_logic 

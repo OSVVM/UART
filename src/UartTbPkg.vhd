@@ -84,12 +84,12 @@ package UartTbPkg is
   ) ;
   
 --  type UartRecArrayType is array (integer range <>) of UartRecType ; 
-  subtype UartRecArrayType is StreamRecArrayType(open)(
-    DataToModel   (UartTb_DataType'range), 
-    ParamToModel  (UartTb_ErrorModeType'range), 
-    DataFromModel (UartTb_DataType'range), 
-    ParamFromModel(UartTb_ErrorModeType'range) 
-  ) ;
+--  subtype UartRecArrayType is StreamRecArrayType(open)(
+--    DataToModel   (UartTb_DataType'range), 
+--    ParamToModel  (UartTb_ErrorModeType'range), 
+--    DataFromModel (UartTb_DataType'range), 
+--    ParamFromModel(UartTb_ErrorModeType'range) 
+--  ) ;
 
   ------------------------------------------------------------
   -- UART Options
