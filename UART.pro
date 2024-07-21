@@ -44,7 +44,12 @@ if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
   analyze ./src/UartTbPkg_xilinx.vhd
 }
 
-analyze ./src/ScoreboardPkg_Uart.vhd
+if {$::osvvm::ToolSupportsGenericPackages}  {
+  analyze ./src/ScoreboardPkg_Uart.vhd
+} else {
+  analyze ./src/deprecated/ScoreboardPkg_Uart_c.vhd
+}
+
 analyze ./src/UartTxComponentPkg.vhd
 analyze ./src/UartRxComponentPkg.vhd
 analyze ./src/UartContext.vhd
