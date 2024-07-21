@@ -184,9 +184,18 @@ begin
             TransRec.ParamFromModel  <= SafeResize(ModelID, RxStim.Error, TransRec.ParamFromModel'length); 
             
             if IsCheck(Operation) then
-              ExpectedStim := 
-                (Data  => SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length), 
-                 Error => to_01(SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length))) ;
+              -- ExpectedStim := 
+              --   (Data  => SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length), 
+              --    Error => to_01(SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length))) ;
+              -- Work arounds for Cadence
+              ExpectedStim.Data  := SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length) ;
+    --          ExpectedStim.Error := to_01(SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length)) ;
+              ExpectedStim.Error := SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length) ;
+              for i in ExpectedStim.Error'range loop 
+                ExpectedStim.Error(i) := to_01(ExpectedStim.Error(i)) ; 
+              end loop ; 
+
+
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 

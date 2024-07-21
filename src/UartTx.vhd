@@ -143,7 +143,11 @@ begin
       case Operation is
         when SEND | SEND_ASYNC =>
           TxStim.Data  := SafeResize(ModelID, TransRec.DataToModel, TxStim.Data'length) ;
-          TxStim.Error := to_01(SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length)) ;
+--          TxStim.Error := to_01(SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length)) ;
+          TxStim.Error := SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length) ;
+          for i in TxStim.Error'range loop 
+            TxStim.Error(i) := to_01(TxStim.Error(i)) ; 
+          end loop ; 
 --          if TxStim.Error(TxStim.Error'right) = '-' then 
 --            TxStim.Error := (TxStim.Error'range => '0') ;
 --          end if ; 
