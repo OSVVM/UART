@@ -43,7 +43,22 @@
 
 
 
+use std.textio.all ;
+
+library ieee ;
+  use ieee.std_logic_1164.all ;
+  use ieee.numeric_std.all ;
+
 library OSVVM ;
+  use OSVVM.IfElsePkg.all ;
+  use OSVVM.OsvvmScriptSettingsPkg.all ;
+  use OSVVM.OsvvmSettingsPkg.all ;
+  use OSVVM.TranscriptPkg.all ;
+  use OSVVM.TextUtilPkg.all ;
+  use OSVVM.AlertLogPkg.all ;
+  use OSVVM.NamePkg.all ;
+  use OSVVM.NameStorePkg.all ;
+  use OSVVM.ResolutionPkg.all ;
 
 use work.UartTbPkg.all ; 
 
