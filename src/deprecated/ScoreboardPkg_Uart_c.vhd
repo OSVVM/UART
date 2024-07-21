@@ -1,6 +1,6 @@
 --
---  File Name:         ScoreBoardPkg_int.vhd
---  Design Unit Name:  ScoreBoardPkg_int
+--  File Name:         ScoreBoardPkg_Uart.vhd
+--  Design Unit Name:  ScoreBoardPkg_Uart
 --  Revision:          STANDARD VERSION
 --
 --  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -47,7 +47,7 @@ library OSVVM ;
 
 use work.UartTbPkg.all ; 
 
-package ScoreBoardPkg_int is
+package ScoreBoardPkg_Uart is
 --  generic (
 --    type ExpectedType ;
 --    type ActualType ;
@@ -956,12 +956,12 @@ package ScoreBoardPkg_int is
   impure function NewID (Name : String; X, Y : integer_vector; ParentAlertLogID : AlertLogIDType; DoNotReport : Boolean) return ScoreboardIdMatrixType ;
 
 
-end ScoreBoardPkg_int ;
+end ScoreBoardPkg_Uart ;
 
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-package body ScoreBoardPkg_int is
+package body ScoreBoardPkg_Uart is
 
   type ScoreBoardPType is protected body
     type ExpectedPointerType is access ExpectedType ;
@@ -3503,4 +3503,4 @@ package body ScoreBoardPkg_int is
   end function NewID ;
 
 
-end ScoreBoardPkg_int ;
+end ScoreBoardPkg_Uart ;
