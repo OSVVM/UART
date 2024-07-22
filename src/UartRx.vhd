@@ -60,12 +60,12 @@ library ieee ;
 
 library OSVVM ;
   context OSVVM.OsvvmContext ; 
---  use osvvm.ScoreboardPkg_slv.all ;
+  use osvvm.ScoreboardPkg_slv.all ;
 --!! GHDL
-  use osvvm.ScoreboardPkg_slv.NewID ;
-  use osvvm.ScoreboardPkg_slv.Empty ;
-  use osvvm.ScoreboardPkg_slv.Push ;
-  use osvvm.ScoreboardPkg_slv.Pop ;
+--  use osvvm.ScoreboardPkg_slv.NewID ;
+--  use osvvm.ScoreboardPkg_slv.Empty ;
+--  use osvvm.ScoreboardPkg_slv.Push ;
+--  use osvvm.ScoreboardPkg_slv.Pop ;
 
 library osvvm_common ; 
   context osvvm_common.OsvvmCommonContext ;  
