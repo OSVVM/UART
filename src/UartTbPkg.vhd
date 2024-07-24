@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    07/2024   2024.07    Removed UartRecArrayType.  Does not work in Xcelium
 --    10/2022   2022.10    Added UartRecArrayType
 --    02/2022   2022.02    Replaced to_hstring with to_hxstring
 --    01/2020   2020.01    Updated license notice
