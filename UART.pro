@@ -17,8 +17,9 @@
 #
 #  Revision History:
 #    Date      Version    Description
-#     1/2019   2019.01    Compile Script for OSVVM
+#     7/2024   2024.07    Added ScoreboardPkg_Uart_c.vhd for Xcelium
 #     1/2020   2020.01    Updated Licenses to Apache
+#     1/2019   2019.01    Compile Script for OSVVM
 #
 #
 #  This file is part of OSVVM.
@@ -44,7 +45,12 @@ if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
   analyze ./src/UartTbPkg_xilinx.vhd
 }
 
-analyze ./src/ScoreboardPkg_Uart.vhd
+if {$::osvvm::ToolSupportsGenericPackages}  {
+  analyze ./src/ScoreboardPkg_Uart.vhd
+} else {
+  analyze ./src/deprecated/ScoreboardPkg_Uart_c.vhd
+}
+
 analyze ./src/UartTxComponentPkg.vhd
 analyze ./src/UartRxComponentPkg.vhd
 analyze ./src/UartContext.vhd
@@ -52,6 +58,6 @@ if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
   analyze ./src/UartTx.vhd
   analyze ./src/UartRx.vhd
 } else {
-  analyze ./src/UartTx_xilinx.vhd
-  analyze ./src/UartRx_xilinx.vhd
+  analyze ./src/deprecated/UartTx_xilinx.vhd
+  analyze ./src/deprecated/UartRx_xilinx.vhd
 }  

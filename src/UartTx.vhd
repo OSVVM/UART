@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    07/2024   2024.07    The calls to to_01(SafeResize(...) were modified to work around Cadence issues
 --    03/2024   2024.03    Updated SafeResize to use ModelID
 --    10/2022   2022.10    Changed enum value PRIVATE to PRIVATE_NAME due to VHDL-2019 keyword conflict.   
 --    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE
@@ -143,7 +144,11 @@ begin
       case Operation is
         when SEND | SEND_ASYNC =>
           TxStim.Data  := SafeResize(ModelID, TransRec.DataToModel, TxStim.Data'length) ;
-          TxStim.Error := to_01(SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length)) ;
+--          TxStim.Error := to_01(SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length)) ;
+          TxStim.Error := SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length) ;
+          for i in TxStim.Error'range loop 
+            TxStim.Error(i) := to_01(TxStim.Error(i)) ; 
+          end loop ; 
 --          if TxStim.Error(TxStim.Error'right) = '-' then 
 --            TxStim.Error := (TxStim.Error'range => '0') ;
 --          end if ; 

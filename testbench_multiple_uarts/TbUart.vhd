@@ -19,9 +19,10 @@
 --
 --  Revision History:
 --    Date      Version    Description
---    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
---    05/2019   2019.05    Updated for OSVVM public release
+--    07/2024   2024.07    Replaced UartRecArrayType with StreamRecArrayType.  Does not work in Xcelium
 --    01/2020   2020.01    Updated license notice
+--    2019.05   2019.05    Updated for OSVVM public release
+--    1999      1999.00    Developed for SynthWorks' Advanced VHDL Testbenches and Verification Class
 --
 --
 --  This file is part of OSVVM.
@@ -74,8 +75,8 @@ architecture TestHarness of TbUart is
       NUM_UARTS : integer := 16
     ) ; 
     port (
-      UartTxRec          : InOut UartRecArrayType ;
-      UartRxRec          : InOut UartRecArrayType ;
+      UartTxRec          : InOut StreamRecArrayType ;
+      UartRxRec          : InOut StreamRecArrayType ;
 
       nReset             : In    std_logic 
     ) ;
@@ -98,7 +99,7 @@ begin
 
   ------------------------------------------------------------
   -- create Clock 
-  Osvvm.TbUtilPkg.CreateClock ( 
+  Osvvm.ClockResetPkg.CreateClock ( 
   ------------------------------------------------------------
     Clk        => Clk, 
     Period     => tperiod_Clk 
@@ -106,7 +107,7 @@ begin
   
   ------------------------------------------------------------
   -- create nReset 
-  Osvvm.TbUtilPkg.CreateReset ( 
+  Osvvm.ClockResetPkg.CreateReset ( 
   ------------------------------------------------------------
     Reset       => nReset,
     ResetActive => '0',

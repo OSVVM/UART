@@ -19,6 +19,8 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    07/2024   2024.07    The calls to to_01(SafeResize(...) were modified to work around Xcelium issue
+--                         osvvm.ScoreboardPkg_slv.NewID replaced by osvvm.ScoreboardPkg_slv.all due to VCS issue
 --    03/2024   2024.03    Updated SafeResize to use ModelID
 --    10/2022   2022.10    Changed enum value PRIVATE to PRIVATE_NAME due to VHDL-2019 keyword conflict.   
 --    05/2022   2022.05    Updated FIFOs so they are Search => PRIVATE
@@ -60,12 +62,11 @@ library ieee ;
 
 library OSVVM ;
   context OSVVM.OsvvmContext ; 
---  use osvvm.ScoreboardPkg_slv.all ;
---!! GHDL
-  use osvvm.ScoreboardPkg_slv.NewID ;
-  use osvvm.ScoreboardPkg_slv.Empty ;
-  use osvvm.ScoreboardPkg_slv.Push ;
-  use osvvm.ScoreboardPkg_slv.Pop ;
+  use osvvm.ScoreboardPkg_slv.all ;
+--  use osvvm.ScoreboardPkg_slv.NewID ;
+--  use osvvm.ScoreboardPkg_slv.Empty ;
+--  use osvvm.ScoreboardPkg_slv.Push ;
+--  use osvvm.ScoreboardPkg_slv.Pop ;
 
 library osvvm_common ; 
   context osvvm_common.OsvvmCommonContext ;  
@@ -184,9 +185,18 @@ begin
             TransRec.ParamFromModel  <= SafeResize(ModelID, RxStim.Error, TransRec.ParamFromModel'length); 
             
             if IsCheck(Operation) then
-              ExpectedStim := 
-                (Data  => SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length), 
-                 Error => to_01(SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length))) ;
+              -- ExpectedStim := 
+              --   (Data  => SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length), 
+              --    Error => to_01(SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length))) ;
+              -- Work arounds for Cadence
+              ExpectedStim.Data  := SafeResize(ModelID, TransRec.DataToModel, ExpectedStim.Data'length) ;
+    --          ExpectedStim.Error := to_01(SafeResize(ModelID, TransRec.ParamToModel, TxStim.Error'length)) ;
+              ExpectedStim.Error := SafeResize(ModelID, TransRec.ParamToModel, ExpectedStim.Error'length) ;
+              for i in ExpectedStim.Error'range loop 
+                ExpectedStim.Error(i) := to_01(ExpectedStim.Error(i)) ; 
+              end loop ; 
+
+
               if Match(RxStim, ExpectedStim) then
                 AffirmPassed(ModelID,
                   "Received: " & to_string(RxStim) & 

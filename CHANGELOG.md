@@ -2,6 +2,7 @@
 
 | Revision  |  Release Summary | 
 ------------|----------- 
+| 2024.07   |  Updated Tb for CreateClock relocation.  Minor updates to work around tool issues.
 | 2022.11   |  Updated DEMO testbench for using multiple VC
 | 2022.10   |  Added DEMO testbench for using multiple VC
 |           |  Changed PRIVATE to PRIVATE_NAME
@@ -15,6 +16,13 @@
 | 2020.01   |  Updated to Apache Licenses
 | 2019.05   |  Updated for OSVVM public release
 | 1999.01   |  Developed as part of SynthWorks' Advanced VHDL Testbenches and Verification Class
+
+## 2024.07
+- Updated Tb for CreateClock relocation.  
+- Minor updates to UartTx and UartRx for Xcelium. 
+- Added deprecated/ScoreboardPkg_Uart for Xcelium.
+- Removed UartRecArrayType - All uses were replaced by StreamRecArrayType.
+- UartRx: replaced individual references of use osvvm.ScoreboardPkg_slv.NewID with use osvvm.ScoreboardPkg_slv.all for VCS
 
 ## 2022.11 November 2022
 - Updated UART/testbench_multiple_uarts testbench for using multiple OSVVM VC using for Generate
