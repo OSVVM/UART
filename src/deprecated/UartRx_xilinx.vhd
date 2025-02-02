@@ -237,7 +237,7 @@ begin
           wait until Uart16XClk = '1' ;
           
         when GET_ALERTLOG_ID =>
-          TransRec.IntFromModel <= ModelID ;
+          TransRec.IntFromModel <= integer(ModelID) ;
           wait until Uart16XClk = '1' ;
 
         when GET_TRANSACTION_COUNT =>

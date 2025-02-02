@@ -177,7 +177,7 @@ begin
           wait until UartTxClk = '1' ;
           
         when GET_ALERTLOG_ID =>
-          TransRec.IntFromModel <= ModelID ;
+          TransRec.IntFromModel <= integer(ModelID) ;
           wait until UartTxClk = '1' ;
 
         when GET_TRANSACTION_COUNT =>
