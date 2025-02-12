@@ -135,9 +135,9 @@ begin
 
       TransmitLoop : loop 
         exit when not TestActive ;
-        if Empty(TxFifo(GEN_UART)) then
+        if IsEmpty(TxFifo(GEN_UART)) then
           wait on TxReq(GEN_UART), TestActive ; 
-          exit when not TestActive and Empty(TxFifo(GEN_UART)) ;
+          exit when not TestActive and IsEmpty(TxFifo(GEN_UART)) ;
         end if ; 
         TxStim := Pop(TxFifo(GEN_UART)) ; 
         SendAsync(UartTxRec(GEN_UART), TxStim.Data, TxStim.Error) ; 
@@ -156,9 +156,9 @@ begin
       wait for 0 ns ; wait for 0 ns ; 
       ReceiveLoop : loop 
         exit when not TestActive ;
-        if Empty(RxScoreboard(GEN_UART)) then
+        if IsEmpty(RxScoreboard(GEN_UART)) then
           wait on RxReq(GEN_UART), TestActive ; 
-          exit when not TestActive and Empty(TxFifo(GEN_UART)) ;
+          exit when not TestActive and IsEmpty(TxFifo(GEN_UART)) ;
         end if ; 
         
         Get(UartRxRec(GEN_UART), ReceivedVal.Data, ReceivedVal.Error) ;

@@ -147,7 +147,7 @@ begin
     begin
       wait for 0 ns ; wait for 0 ns ; 
       UartReceiveLoop : loop 
-        if Empty(UartScoreboard(GEN_UART)) then
+        if IsEmpty(UartScoreboard(GEN_UART)) then
           wait on RxReq(GEN_UART), TestActive ; 
           exit when not TestActive ;
         end if ; 

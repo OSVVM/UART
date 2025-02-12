@@ -140,7 +140,7 @@ begin
     begin
       RvCtrl.InitSeed(RvCtrl'INSTANCE_NAME) ;
       wait for 0 ns ; wait for 0 ns ; 
-      ReceiveLoop : while TestActive or not Empty(RxScoreboard(GEN_UART)) loop 
+      ReceiveLoop : while TestActive or not IsEmpty(RxScoreboard(GEN_UART)) loop 
         for i in 1 to RvCtrl.RandInt(1, 20) loop         
           Get(UartRxRec(GEN_UART), ReceivedVal.Data, ReceivedVal.Error) ;
           Check(RxScoreboard(GEN_UART), ReceivedVal ) ; 
