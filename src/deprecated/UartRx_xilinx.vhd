@@ -63,7 +63,7 @@ library OSVVM ;
 --  use osvvm.ScoreboardPkg_slv.all ;
 --!! GHDL
   use osvvm.ScoreboardPkg_slv.NewID ;
-  use osvvm.ScoreboardPkg_slv.Empty ;
+  use osvvm.ScoreboardPkg_slv.IsEmpty ;
   use osvvm.ScoreboardPkg_slv.Push ;
   use osvvm.ScoreboardPkg_slv.Pop ;
 
@@ -174,13 +174,13 @@ begin
       
       case Operation is
         when GET | TRY_GET | CHECK | TRY_CHECK =>
-          if Empty(ReceiveFifo) and IsTry(Operation) then
+          if IsEmpty(ReceiveFifo) and IsTry(Operation) then
             -- Return if no data
             TransRec.BoolFromModel <= FALSE ; 
           else
             -- Get data
             TransRec.BoolFromModel <= TRUE ; 
-            if Empty(ReceiveFifo) then 
+            if IsEmpty(ReceiveFifo) then 
               -- Wait for data
               WaitForToggle(ReceiveCount) ;
             else 
@@ -223,7 +223,7 @@ begin
           end if ; 
           
         when WAIT_FOR_TRANSACTION =>
-          if Empty(ReceiveFifo) then 
+          if IsEmpty(ReceiveFifo) then 
             WaitForToggle(ReceiveCount) ;
           end if ; 
 
