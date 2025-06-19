@@ -41,8 +41,4 @@
 TestSuite Uart
 library   osvvm_TbUart
 
-if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
-  include ./testbench/build_one.pro
-} else {
-  include ./testbench_xilinx/build_one.pro
-}
+include ./testbench/build_one.pro

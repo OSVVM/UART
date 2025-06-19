@@ -41,12 +41,8 @@
 TestSuite Uart
 library   osvvm_TbUart
 
-if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
-  include ./testbench
-} else {
-  include ./testbench_xilinx
-}
+include ./testbench
 
-if {($::osvvm::ToolVendor ne "GHDL") && ($::osvvm::ToolNameVersion ne "XSIM-2023.2")}  {
+if {($::osvvm::ToolVendor ne "GHDL") }  {
   include ./testbench_multiple_uarts
 }
