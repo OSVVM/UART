@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    06/2025   2025.06    Added pull request to initialize FIFOS and make them non-reporting - note they are not used
 --    07/2024   2024.07    The calls to to_01(SafeResize(...) were modified to work around Cadence issues
 --    03/2024   2024.03    Updated SafeResize to use ModelID
 --    10/2022   2022.10    Changed enum value PRIVATE to PRIVATE_NAME due to VHDL-2019 keyword conflict.   
@@ -132,7 +133,7 @@ begin
     NumDataBits   <= CheckNumDataBits(ModelID, DEFAULT_NUM_DATA_BITS, FALSE) ; 
     Baud          <= CheckBaud(ModelID, DEFAULT_BAUD, FALSE) ;
     -- Initialize BurstFifo even though it is not used, to prevent weird errors
-    TransRec.BurstFifo <= NewID("TxBurstFifo", ModelID, Search => PRIVATE_NAME) ;
+    TransRec.BurstFifo <= NewID("TxBurstFifo", ModelID, ReportMode => DISABLED, Search => PRIVATE_NAME) ;
     wait for 0 ns ;  -- Allow TransRec.BurstFifo to update.
 
     TransactionDispatcherLoop : loop 
