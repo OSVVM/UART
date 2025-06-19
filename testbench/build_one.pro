@@ -40,7 +40,7 @@
 
 library TbUart
 
-analyze  OsvvmTestCommonPkg.vhd
+analyze [CreateTestCaseCommonPkg OsvvmTestCommonPkg ../ValidatedResults]
 
 analyze  TestCtrl_e.vhd
 analyze  TbUart.vhd
