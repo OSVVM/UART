@@ -69,7 +69,7 @@ begin
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_UartX16_2.txt") ;
+    TranscriptOpen ;
     SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
@@ -82,7 +82,7 @@ begin
     AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
---    AlertIfDiff("./results/TbUart_UartX16_2.txt", "../Uart/testbench/validated_results/TbUart_UartX16_2.txt", "") ; 
+--    AffirmIfTranscriptsMatch(PATH_TO_VALIDATED_RESULTS) ;
     
     -- Create yaml reports for UART scoreboard
     osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
