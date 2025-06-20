@@ -82,15 +82,13 @@ begin
 
     -- Wait for test to finish
     WaitForBarrier(TestDone, 5 ms) ;
-    AlertIf(now >= 10 ms, "Test finished due to timeout") ;
-    AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
 --    AffirmIfTranscriptsMatch(PATH_TO_VALIDATED_RESULTS) ;
     
     -- Create yaml reports for UART scoreboard
     osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
-    EndOfTestReports ; 
+    EndOfTestReports(TimeOut => (now >= 5 ms)) ; 
     std.env.stop ;
     wait ; 
   end process ControlProc ; 
