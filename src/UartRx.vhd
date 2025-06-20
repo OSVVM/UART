@@ -155,7 +155,7 @@ begin
     NumDataBits   <= CheckNumDataBits(ModelID, DEFAULT_NUM_DATA_BITS, FALSE) ; 
     Baud          <= CheckBaud(ModelID, DEFAULT_BAUD, FALSE) ;
     -- Initialize BurstFifo even though it is not used, to prevent weird errors
-    TransRec.BurstFifo <= NewID("RxBurstFifo", ModelID, ReportMode => DISABLED, Search => PRIVATE_NAME, ) ;
+    TransRec.BurstFifo <= NewID("RxBurstFifo", ModelID, ReportMode => DISABLED, Search => PRIVATE_NAME) ;
     wait for 0 ns ;  -- Allow TransRec.BurstFifo to update.
 
     TransactionDispatcherLoop : loop 
