@@ -38,7 +38,5 @@
 #  limitations under the License.
 #  
 
-TestSuite Uart
-library   osvvm_TbUart
 
 include ./testbench/build_one.pro
