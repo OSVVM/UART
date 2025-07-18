@@ -2,6 +2,8 @@
 
 | Revision  |  Release Summary | 
 ------------|----------- 
+| 2025.06   |  Autogenerate OsvvmTestCommonPkg.  Update testbenches for TranscriptOpen and AffirmIfTranscriptsMatch
+|           |  Removed Xilinx 2023.2 specializations as not completely working.  build.pro replaced <DirectoryName>.pro.  
 | 2024.07   |  Updated Tb for CreateClock relocation.  Minor updates to work around tool issues.
 | 2022.11   |  Updated DEMO testbench for using multiple VC
 | 2022.10   |  Added DEMO testbench for using multiple VC

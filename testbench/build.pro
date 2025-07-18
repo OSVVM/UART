@@ -38,9 +38,10 @@
 #  limitations under the License.
 #  
 
-library TbUart
+TestSuite UART
+library osvvm_TbUart
 
-analyze  OsvvmTestCommonPkg.vhd
+analyze [CreateTestCaseCommonPkg OsvvmTestCommonPkg ../ValidatedResults]
 
 analyze  TestCtrl_e.vhd
 analyze  TbUart.vhd

@@ -2,3 +2,4 @@ plan
 plan/*
 _update_notes.txt
 /testbench_xilinx_works/
+OsvvmTestCommonPkg*

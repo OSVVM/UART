@@ -38,15 +38,8 @@
 #  limitations under the License.
 #  
 
-TestSuite Uart
-library   osvvm_TbUart
+include ./testbench
 
-if {$::osvvm::ToolNameVersion ne "XSIM-2023.2"}  {
-  include ./testbench
-} else {
-  include ./testbench_xilinx
-}
-
-if {($::osvvm::ToolVendor ne "GHDL") && ($::osvvm::ToolNameVersion ne "XSIM-2023.2")}  {
+if {($::osvvm::ToolVendor ne "GHDL") }  {
   include ./testbench_multiple_uarts
 }

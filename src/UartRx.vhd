@@ -19,6 +19,7 @@
 --
 --  Revision History:
 --    Date      Version    Description
+--    06/2025   2025.06    Added pull request to initialize FIFOS and make them non-reporting - note they are not used
 --    07/2024   2024.07    The calls to to_01(SafeResize(...) were modified to work around Xcelium issue
 --                         osvvm.ScoreboardPkg_slv.NewID replaced by osvvm.ScoreboardPkg_slv.all due to VCS issue
 --    03/2024   2024.03    Updated SafeResize to use ModelID
@@ -152,7 +153,10 @@ begin
     ParityMode    <= CheckParityMode (ModelID, DEFAULT_PARITY_MODE,   FALSE) ; 
     NumStopBits   <= CheckNumStopBits(ModelID, DEFAULT_NUM_STOP_BITS, FALSE) ; 
     NumDataBits   <= CheckNumDataBits(ModelID, DEFAULT_NUM_DATA_BITS, FALSE) ; 
-    Baud          <= CheckBaud(ModelID, DEFAULT_BAUD, FALSE) ;  
+    Baud          <= CheckBaud(ModelID, DEFAULT_BAUD, FALSE) ;
+    -- Initialize BurstFifo even though it is not used, to prevent weird errors
+    TransRec.BurstFifo <= NewID("RxBurstFifo", ModelID, ReportMode => DISABLED, Search => PRIVATE_NAME) ;
+    wait for 0 ns ;  -- Allow TransRec.BurstFifo to update.
 
     TransactionDispatcherLoop : loop 
       WaitForTransaction(

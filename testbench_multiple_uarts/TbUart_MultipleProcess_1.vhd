@@ -69,7 +69,7 @@ begin
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_MultipleProcess_1.txt") ;
+    TranscriptOpen ;
     SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
@@ -82,15 +82,13 @@ begin
 
     -- Wait for test to finish
     WaitForBarrier(TestDone, 5 ms) ;
-    AlertIf(now >= 10 ms, "Test finished due to timeout") ;
-    AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
---    AlertIfDiff("./results/TbUart_MultipleProcess_1.txt", "../Uart/testbench/validated_results/TbUart_MultipleProcess_1.txt", "") ; 
+--    AffirmIfTranscriptsMatch(PATH_TO_VALIDATED_RESULTS) ;
     
     -- Create yaml reports for UART scoreboard
     osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
-    EndOfTestReports ; 
+    EndOfTestReports(TimeOut => (now >= 5 ms)) ; 
     std.env.stop ;
     wait ; 
   end process ControlProc ; 

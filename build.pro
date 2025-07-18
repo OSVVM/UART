@@ -1,4 +1,4 @@
-#  File Name:         testbench.pro
+#  File Name:         Uart.pro
 #  Revision:          OSVVM MODELS STANDARD VERSION
 #
 #  Maintainer:        Jim Lewis      email:  jim@synthworks.com
@@ -7,7 +7,7 @@
 #
 #
 #  Description:
-#        Script to run one UART test
+#        Script to compile the OSVVM UART models  
 #
 #  Developed for:
 #        SynthWorks Design Inc.
@@ -17,8 +17,9 @@
 #
 #  Revision History:
 #    Date      Version    Description
-#     1/2019   2019.01    Compile Script for OSVVM UART
+#     7/2024   2024.07    Added ScoreboardPkg_Uart_c.vhd for Xcelium
 #     1/2020   2020.01    Updated Licenses to Apache
+#     1/2019   2019.01    Compile Script for OSVVM
 #
 #
 #  This file is part of OSVVM.
@@ -36,19 +37,18 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-#  
+#
+library osvvm_uart
+analyze ./src/UartTbPkg.vhd
 
-# library osvvm_uart
-# analyze ../src/UartTx_xilinx.vhd 
-# analyze ../src/UartRx_xilinx.vhd 
+if {$::osvvm::ToolSupportsGenericPackages}  {
+  analyze ./src/ScoreboardPkg_Uart.vhd
+} else {
+  analyze ./src/deprecated/ScoreboardPkg_Uart_c.vhd
+}
 
-library tbuart
-
-analyze  OsvvmTestCommonPkg.vhd
-
-analyze  TestCtrl_e.vhd
-analyze  TbUart.vhd
-
-analyze   TbUart_SendGet1.vhd
-TestName  TbUart_SendGet1
-simulate  TbUart
+analyze ./src/UartTxComponentPkg.vhd
+analyze ./src/UartRxComponentPkg.vhd
+analyze ./src/UartContext.vhd
+analyze ./src/UartTx.vhd
+analyze ./src/UartRx.vhd

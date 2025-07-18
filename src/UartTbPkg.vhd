@@ -271,7 +271,7 @@ package UartTbPkg is
   alias UartGet is   Get  [UartRecType, std_logic_vector, std_logic_vector, boolean] ;
   alias UartCheck is Check[UartRecType, std_logic_vector, boolean] ;
   alias UartCheck is Check[UartRecType, std_logic_vector, std_logic_vector, boolean] ;
-  alias NoOp is      WaitForClock[UartRecType, natural] ;
+  -- alias NoOp is      WaitForClock[UartRecType, natural, std_logic] ; -- already in StreamTransactionPkg
 
 end UartTbPkg ;
 

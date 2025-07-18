@@ -67,7 +67,7 @@ begin
 
     -- Wait for testbench initialization 
     wait for 0 ns ;  wait for 0 ns ;
-    TranscriptOpen(OSVVM_RESULTS_DIR & "TbUart_Checkers2.txt") ;
+    TranscriptOpen ;
 --    SetTranscriptMirror(TRUE) ; 
 
     -- Wait for Design Reset
@@ -76,14 +76,12 @@ begin
     
     -- Wait for test to finish
     WaitForBarrier(TestDone, 10 ms) ;
-    AlertIf(now >= 10 ms, "Test finished due to timeout") ;
-    AlertIf(GetAffirmCount < 1, "Test is not Self-Checking");
     
     TranscriptClose ; 
---    AlertIfDiff("./results/TbUart_Checkers2.txt", "../Uart/testbench/validated_results/TbUart_Checkers2.txt", "") ; 
+--    AffirmIfTranscriptsMatch(PATH_TO_VALIDATED_RESULTS) ;
     
     osvvm_uart.ScoreboardPkg_Uart.WriteScoreboardYaml(FileName => "Uart") ;
-    EndOfTestReports(ExternalErrors => (FAILURE => 0, ERROR => -15, WARNING => 0)) ; 
+    EndOfTestReports(ExternalErrors => (FAILURE => 0, ERROR => -15, WARNING => 0), TimeOut => (now >= 10 ms)) ; 
     std.env.stop ;
     wait ; 
   end process ControlProc ; 
